@@ -26,7 +26,7 @@ const TypingEffect: React.FC<TypingEffectProps> = ({ text, speed = 50 }) => {
   }, [text, speed]);
 
   return (
-    <p className="font-semibold text-center mt-[-10px] mb-10 md:text-lg text-sm text-amber-200 drop-shadow-[0_2px_5px_rgba(0,0,0,1)]">
+    <p className="font-semibold text-center mt-[-10px] mb-10 md:text-lg text-sm text-teal-400 drop-shadow-[0_2px_5px_rgba(0,0,0,1)]">
       {displayedText}
     </p>
   );

@@ -1,246 +1,154 @@
-import React, { useRef, useState } from 'react';
-import { Play } from 'lucide-react';
-import { useInView } from '../../hooks/useInView';
-import desenchufate from './SINFILTROS.jpg';
-import cadaloco from './cadaloco.jpg';
-import deportes from './hablemos.jpg';
-import hector from './cocina.jpeg';
+import React, { useState, useEffect, useRef } from "react";
+import mision from "./mision.jpg";
+import propuesta from "./premio.jpg";
+import introduccion from "./intro.jpg";
+import sobreNosotros from "./nosotros.jpg";
 
-const columns = [
+const sections = [
   {
-    title: "Sin Filtros",
-    background: desenchufate,
-    tracks: [
-      {
-        id: "IQLXM24UHSw",
-        url: "https://www.youtube.com/live/IQLXM24UHSw?si=hko3y6502WN-YDwT",
-        title: "La empatía en el deporte"
-      },
-      {
-        id: "EeWJdnok9FM",
-        url: "https://www.youtube.com/live/EeWJdnok9FM?si=5WKA3HMpqjFdzen9",
-        title: "Encontrar Equilibrio en la vida"
-      },
-      {
-        id: "24bRPEWwQnE",
-        url: "https://www.youtube.com/live/24bRPEWwQnE?si=2Z3xP6OUtNEaJMLg",
-        title: "Hoy Hablamos de Sexualidad"
-      },
-      {
-        id: "yNifIpxKukU",
-        url: "https://www.youtube.com/live/yNifIpxKukU?si=0wOy4J_I-GLgftxf",
-        title: "Lanzamiento Oficial"
-      },
-    ],
+    title: "INTRODUCCIÓN",
+    image: introduccion,
+    content: `Travesías Uruguay es una empresa dedicada a la organización de eventos deportivos de natación en aguas abiertas. Integrada por los Licenciados Pablo Olivera y Diego Chiriff, fundada en el 2018, la empresa ha crecido y consolidado su presencia en el calendario deportivo de nuestro país así como en Sudamérica. Comenzamos con un único evento y, con conocimiento, profesionalismo y dedicación, hoy celebramos 8 años de permanencia reafirmando nuestro compromiso con el deporte y la comunidad.
+    
+Combinamos de forma armónica dinamismo, deporte y conexión con el agua, representando visualmente el espíritu de nuestras competencias. Se destaca la silueta estilizada de un nadador en pleno movimiento, ejecutando una brazada, que simboliza el esfuerzo, la técnica y la pasión por la natación en aguas abiertas. Una serie de líneas curvas en tonos celeste evocan el movimiento del agua, transmitiendo fluidez, velocidad y la conexión directa con el entorno natural donde se desarrollan nuestros eventos.
+
+El nombre “TRAVESÍAS” aparece en tipografía mayúscula, sólida y moderna, con un estilo ligeramente desgastado que sugiere desafío, aventura y resistencia. El texto “URUGUAY” refuerza la identidad local del proyecto, en una fuente más limpia y clara, aportando equilibrio y profesionalismo al diseño.
+
+En conjunto, el logo transmite los valores centrales de la marca: deporte, naturaleza, desafío, superación, inclusión y pasión por el agua. Es una imagen potente y reconocible, ideal para representar eventos deportivos de alto impacto y atraer tanto a deportistas como a patrocinadores comprometidos con el desarrollo del deporte y la vida sana.`,
   },
   {
-    title: "Hablemos de Deporte",
-    background: deportes,
-    tracks: [
-      {
-        id: "zM5ty6-A3XA",
-        url: "https://www.youtube.com/watch?v=pe6X6F0zpEs",
-        title: "Proximamente"
-      },
-      {
-        id: "",
-        url: "https://youtube.com",
-        title: "proximamente"
-      },
-      {
-        id: "",
-        url: "https://youtube.com",
-        title: "proximamente"
-      },
-      {
-        id: "",
-        url: "https://youtube.com",
-        title: "proximamente"
-      },
-    ],
+    title: "SOBRE NOSOTROS",
+    image: sobreNosotros,
+    content: `Travesías Uruguay es la organización líder en el mercado nacional y una referencia internacional en la creación de eventos de natación en aguas abiertas. Nos enfocamos en el diseño de experiencias únicas que celebran la conexión del ser humano con la naturaleza. No vendemos carreras; creamos momentos de superación, camaradería y aventura en los escenarios acuáticos más icónicos de Uruguay. Nuestros eventos fusionan lo deportivo, lo cultural y lo turístico para brindar una propuesta única.`,
   },
   {
-    title: "Cocina Simple Pero Sabrosa",
-    background: hector,
-    tracks: [
-      {
-        id: "",
-        url: "https://youtube.com",
-        title: "Proximamente"
-      },
-      {
-        id: "",
-        url: "https://youtube.com",
-        title: "proximamente"
-      },
-      {
-        id: "",
-        url: "https://youtube.com",
-        title: "proximamente"
-      },
-      {
-        id: "",
-        url: "https://youtube.com",
-        title: "proximamente"
-      },
-    ],
+    title: "MISIÓN Y VALORES",
+    image: mision,
+    content: `MISIÓN
+"El movimiento es una medicina para crear el cambio físico, emocional y mental" - Gene Tunney
+
+Ser el principal referente en eventos de natación en aguas abiertas en Uruguay y la región del Cono Sur, reconocidos por trascender la competencia para ofrecer experiencias transformadoras. Buscamos inspirar a una comunidad global a través de la pasión por el deporte y el profundo respeto por el medio ambiente.
+
+VALORES
+Diseñar, producir y ejecutar eventos de natación en aguas abiertas de primer nivel internacional que ofrezcan a cada participante una experiencia de vida. Priorizamos la seguridad, la emoción y la sostenibilidad, creando un legado de momentos inolvidables y un impacto positivo en las comunidades.`,
   },
   {
-    title: "Cada Loco con su Tema",
-    background: cadaloco,
-    tracks: [
-      {
-        id: "DDf_5Td-xeM",
-        url: "https://www.youtube.com/live/DDf_5Td-xeM?si=6A0Kw7P51szf09CN",
-        title: "Psicología y Salud Mental"
-      },
-      {
-        id: "eY4GM1Nqhn0",
-        url: "https://www.youtube.com/live/eY4GM1Nqhn0?si=oYUyIeWdpposVg7z",
-        title: "Anecdotas de la noche"
-      },
-      {
-        id: "4racqJXtVls",
-        url: "https://www.youtube.com/live/4racqJXtVls?si=xyr22CDGFKAPtnb8",
-        title: "Unpopular Opinions"
-      },
-      {
-        id: "OL-N_X8SCyY",
-        url: "https://www.youtube.com/live/OL-N_X8SCyY?si=pykeAb2c-wUM2FrV",
-        title: "Primera Transmisión"
-      },
-    ],
+    title: "PROPUESTAS DEPORTIVAS",
+    image: propuesta,
+    content: `En nuestros eventos los espectadores disfrutan de una vista privilegiada del circuito trazado, creando una experiencia íntima, permitiendo presenciar el esfuerzo de los nadadores y la estrategia de la competencia a lo largo de todo el recorrido.
+
+CARRERA ELITE: Carreras de 5km. Octavo año consecutivo la Federación Uruguaya de Natación nos elige para recibir a los mejores nadadores de Uruguay y del mundo, en clasificatorios a Sudamericanos, Copas del Mundo y Mundiales de Aguas Abiertas. También somos sede de la Primera Etapa del Circuito Sudamericano de Natación en Aguas Abiertas. Edades de 14 a 25 años.
+
+CARRERA MASTER: Carreras de 3km. Somos el campeonato más grande del país, contando con nadadores destacados del Campeonato Nacional Master de Aguas Abiertas. Edades desde los 20 años en adelante.
+
+CARRERA SPRINT: Carreras de 1km. Distancia accesible a todos los niveles, ideal para iniciarse en la natación en aguas abiertas.
+
+DISCAPACIDAD: Pioneros en verdadera inclusión. Competidores con cualquier discapacidad participan en las mismas carreras y reciben su propia premiación.
+
+CARRERA KIDS: Carreras de 400 metros. Los más pequeños acompañados por la familia dan sus primeras brazadas en un entorno natural y mágico.
+
+GALA DE PREMIACIÓN: Nuestra “Triple Corona” premia a los deportistas destacados de la temporada en una gala nocturna con glamour y recuerdos inolvidables.`,
   },
 ];
 
-const MusicSection = () => {
-  const sectionRef = useRef(null);
-  const { inView } = useInView(sectionRef, { threshold: 0.1 });
-  const [openTracks, setOpenTracks] = useState({});
+const InfoScrollSection = () => {
+  const [selected, setSelected] = useState<number | null>(null);
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [visibleSections, setVisibleSections] = useState<boolean[]>(new Array(sections.length).fill(false));
 
-  const toggleTrack = (colIndex, trackId) => {
-    const key = `${colIndex}-${trackId}`;
-    setOpenTracks(prev => ({
-      ...prev,
-      [key]: !prev[key],
-    }));
-  };
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = Number(entry.target.getAttribute("data-index"));
+          if (entry.isIntersecting) {
+            setVisibleSections((prev) => {
+              const updated = [...prev];
+              updated[index] = true;
+              return updated;
+            });
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
 
-  const getButtonColor = (title) => {
-    switch (title) {
-      case "Sin Filtros":
-        return "bg-[#947e6c] hover:bg-[#947e6c]";
-      case "Hablemos de Deporte":
-        return "bg-[#4ef408] hover:bg-green-400";
-      case "Cada Loco con su Tema":
-        return "bg-red-500 hover:bg-red-600";
-      default:
-        return "bg-amber-400 hover:bg-amber-500";
-    }
-  };
+    sectionRefs.current.forEach((section) => {
+      if (section) observer.observe(section);
+    });
+
+    return () => {
+      sectionRefs.current.forEach((section) => {
+        if (section) observer.unobserve(section);
+      });
+    };
+  }, []);
 
   return (
-    <section
-      id="Programas"
-      ref={sectionRef}
-      className="py-20 bg-gradient-to-b from-black to-gray-900"
+    <section className="w-full bg-black text-white">
+      {sections.map((sec, index) => (
+        <div
+          key={index}
+          ref={(el) => (sectionRefs.current[index] = el)}
+          data-index={index}
+          className={`relative min-h-[50vh] flex flex-col items-center justify-center text-center overflow-hidden transition-all duration-1000 ease-out ${
+            visibleSections[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+          }`}
+        >
+          <div
+            className="absolute inset-0 bg-cover bg-center transition-transform duration-700 scale-105 hover:scale-110"
+            style={{ backgroundImage: `url(${sec.image})` }}
+          ></div>
+
+          <div className="absolute inset-0 bg-black/70"></div>
+
+          <div className="relative z-10 px-8 md:px-20 lg:px-32">
+            <h2 className="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-lg">
+              {sec.title}
+            </h2>
+            <button
+              onClick={() => setSelected(index)}
+              className="text-white bg-white/20 hover:bg-white/30 backdrop-blur-md transition px-8 py-3 rounded-full text-lg font-medium"
+            >
+              Leer más <span className="ml-2 text-2xl font-bold">+</span>
+            </button>
+          </div>
+        </div>
+      ))}
+
+      {selected !== null && (
+  <div
+    className="fixed inset-0 flex items-center justify-center px-6 z-50 bg-black/80 backdrop-blur-sm"
+    onClick={() => setSelected(null)}
+  >
+    {/* Fondo fijo del modal */}
+    <div
+      className="absolute inset-0 bg-cover bg-center"
+      style={{ backgroundImage: `url(${sections[selected].image})` }}
+    ></div>
+    {/* Overlay oscuro fijo */}
+    <div className="absolute inset-0 bg-black/70"></div>
+
+    {/* Contenido scrollable */}
+    <div
+      className="relative z-10 w-full max-w-2xl p-10 rounded-2xl overflow-y-auto max-h-[90vh]"
+      onClick={(e) => e.stopPropagation()}
     >
-      <div className="container mx-auto lg:px-20 px-4 mt-20 mb-10">
-        <div className="text-center mb-16">
-          <h2
-            className={`text-3xl md:text-4xl font-bold mb-4 transition-all duration-700 ${inView ? "opacity-100 transform-none" : "opacity-0 translate-y-10"
-              }`}
-          >
-            Revive Nuestros Programas
-          </h2>
-          <p
-            className={`text-gray-400 max-w-2xl mx-auto transition-all duration-700 delay-200 ${inView ? "opacity-100 transform-none" : "opacity-0 translate-y-10"
-              }`}
-          >
-            Mira los últimos programas, y revive todo el entretenimiento, risas y los momentos que solo te da Navegando TV.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {columns.map((column, colIndex) => {
-            const bgStyle = {
-              backgroundImage: `url(${column.background})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            };
-
-            return (
-              <div
-                key={colIndex}
-                className={`relative rounded-lg overflow-hidden shadow-xl transition-all duration-700 delay-${colIndex * 300} ${inView ? "opacity-100 transform-none" : "opacity-0 translate-y-10"
-                  }`}
-                style={bgStyle}
-              >
-                <div className="absolute inset-0 bg-black/70"></div>
-
-                <div className="relative p-5 text-white">
-                  <h3 className="text-2xl font-bold mb-6">{column.title}</h3>
-
-                  {column.tracks.map((track) => {
-                    const key = `${colIndex}-${track.id}`;
-                    const isOpen = !!openTracks[key];
-
-                    return (
-                      <div key={track.id || track.title} className="mb-6">
-                        <div className="flex justify-between items-center">
-                          <h4 className="text-lg font-semibold">{track.title}</h4>
-                          <button
-                            onClick={() => toggleTrack(colIndex, track.id)}
-                            className={`${getButtonColor(column.title)} p-2 rounded-full transition-colors flex items-center justify-center`}
-                            aria-label={`${isOpen ? 'Cerrar' : 'Reproducir'} ${track.title}`}
-                          >
-                            <Play size={18} color="white" className="ml-1" />
-                          </button>
-                        </div>
-
-                        {isOpen && (
-                          <div className="mt-3 aspect-w-16 text-center aspect-h-14 rounded overflow-hidden shadow-lg">
-                            <iframe
-                              loading="lazy"
-                              className="w-full h-60"
-                              src={`https://www.youtube-nocookie.com/embed/${track.id}?rel=0&showinfo=0&autoplay=1`}
-                              title={track.title}
-                              frameBorder="0"
-                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                              allowFullScreen
-                              key={track.id}
-                            ></iframe>
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
-
-                  <div className="mt-6">
-                    <a
-                      href="https://www.youtube.com/@NAVEGANDO-TV"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-red-700 hover:bg-red-600 transition-colors text-white font-semibold px-4 py-2 rounded-full"
-                    >
-                      <img
-                        src="https://img.icons8.com/?size=100&id=37326&format=png&color=FFFFFF"
-                        className="h-8 w-8"
-                        alt="YouTube icono"
-                        width="32"
-                        height="32"
-                      />
-                      Ver más en YouTube
-                    </a>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      <button
+        className="absolute top-3 right-4 text-3xl font-bold text-white hover:text-teal-400"
+        onClick={() => setSelected(null)}
+      >
+        ×
+      </button>
+      <h2 className="text-4xl font-semibold mb-6">{sections[selected].title}</h2>
+      <p className="text-gray-300 leading-relaxed text-lg whitespace-pre-line">
+        {sections[selected].content}
+      </p>
+    </div>
+  </div>
+)}
     </section>
   );
 };
 
-export default MusicSection;
+export default InfoScrollSection;

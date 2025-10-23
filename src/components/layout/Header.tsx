@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import logo from '../sections/channels4_banner-removebg-preview.png';
+import logo from '../sections/logow.png';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,9 +30,9 @@ const Header = () => {
 
   const menuItems = [
     { name: 'Inicio', href: '#hero' },
-    { name: 'Programas', href: '#Programas' },
-    { name: 'Sobre Nosotros', href: '#sobre' },
-    { name: 'Shorts', href: '#shorts' },
+    { name: 'Sobre Nosotros', href: '#Programas' },
+    { name: 'Equipo', href: '#sobre' },
+    { name: 'Calendario', href: '#shorts' },
     { name: 'Avisos', href: '#aviso' },
     { name: 'Contacto', href: '#contacto' },
   ];
@@ -45,7 +45,7 @@ return (
       showHeader ? 'translate-y-0' : '-translate-y-full'
     }`}
     style={{
-      backgroundColor: isOpen ? 'rgb(0, 0, 0)' : bgColor, // 🔥 fondo negro sólido sin transparencia
+      backgroundColor: isOpen ? 'rgb(255, 255, 255)' : bgColor,
       padding: isOpen ? '1rem 0' : scrolled ? '0.75rem 0' : '1rem 0',
       boxShadow: scrolled ? '0 4px 6px rgba(0, 0, 0, 0.1)' : 'none',
       willChange: 'transform',
@@ -53,7 +53,7 @@ return (
     >
       <div className="container mx-auto lg:pl-16 px-6 flex justify-between items-center">
         <a href="#" className="flex items-center gap-2">
-          <img src={logo} alt="Logo" className="h-6 w-24 md:h-8 mb-2 md:mt-3 mt-5 md:w-40 ml-2" />
+          <img src={logo} alt="Logo" className="h-6 w-24 md:h-16 mb-2 md:mt-1 mt-5 md:w-32 ml-2" />
         </a>
 
         <nav className="hidden lg:block mr-5">
@@ -62,7 +62,7 @@ return (
               <li key={item.name}>
                 <a
                   href={item.href}
-                  className="text-xs font-bold uppercase tracking-wider text-amber-200 hover:text-white transition"
+                  className="text-sm font-bold uppercase tracking-wider text-teal-400 hover:text-white transition"
                 >
                   {item.name}
                 </a>

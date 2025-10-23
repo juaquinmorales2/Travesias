@@ -4,18 +4,18 @@ import { useInView } from '../../hooks/useInView';
 const tweets = [
   {
     id: 1,
-    content: "¡Gracias a todos por el apoyo en la inauguracion de Navegando TV! 🚀",
-    date: "2025-05-20"
+    content: "Acá hay que poner",
+    date: "2025-05-20",
   },
   {
     id: 2,
-    content: "Genios los del l'incanto, pronto habrá sorpresas... 👀🔥",
-    date: "2025-05-18"
+    content: "Acá hay que poner algo",
+    date: "2025-05-18",
   },
   {
     id: 3,
-    content: "Gracias por acompañarnos hoy en Paseo del este❤️",
-    date: "2025-05-15"
+    content: "Otros anuncios",
+    date: "2025-05-15",
   },
 ];
 
@@ -25,21 +25,22 @@ const TwitterSection = () => {
   const { inView } = useInView(sectionRef, { threshold: 0.1 });
 
   return (
-    <section 
-      id="aviso" 
+    <section
+      id="aviso"
       ref={sectionRef}
       className="relative py-20 bg-gradient-to-b from-black to-gray-900 overflow-hidden md:pt-20"
     >
       <div className="container mx-auto px-4 relative z-10 md:pt-20">
+        {/* Título */}
         <div className="text-center mb-16">
-          <h2 
+          <h2
             className={`text-3xl md:text-4xl font-bold mb-4 transition-all duration-700 ${
               inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
             NOVEDADES
           </h2>
-          <p 
+          <p
             className={`text-gray-400 max-w-2xl mx-auto transition-all duration-700 delay-200 ${
               inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
@@ -48,8 +49,9 @@ const TwitterSection = () => {
           </p>
         </div>
 
+        {/* Contenido principal */}
         <div className="flex flex-col md:flex-row gap-12 items-stretch justify-center">
-
+          {/* Tweets */}
           <div
             ref={tweetsRef}
             className={`relative max-w-lg w-full bg-gray-900/60 backdrop-blur-sm rounded-lg p-6 shadow-xl transition-all duration-700 ${
@@ -61,39 +63,43 @@ const TwitterSection = () => {
               Últimos Anuncios
             </h3>
             <ul className="space-y-5">
-              {tweets.map(tweet => (
-                <li key={tweet.id} className="bg-gray-800 p-4 rounded-lg border border-gray-700">
+              {tweets.map((tweet) => (
+                <li
+                  key={tweet.id}
+                  className="bg-gray-800 p-4 rounded-lg border border-gray-700"
+                >
                   <p className="text-gray-300">{tweet.content}</p>
-                  <span className="text-sm text-gray-500 block mt-2">{tweet.date}</span>
+                  <span className="text-sm text-gray-500 block mt-2">
+                    {tweet.date}
+                  </span>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div 
+          {/* Videos */}
+          <div
             className={`flex flex-col gap-6 flex-grow max-w-md rounded-lg overflow-hidden shadow-xl transition-all duration-700 ${
               inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
             style={{ minHeight: '400px' }}
           >
             <iframe
-          src="https://www.youtube.com/embed/Vlalce7RY78?si=lzFRo4sFvx_07OnV"
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-          className="w-full h-full rounded-xl shadow-lg"
-          referrerPolicy="strict-origin-when-cross-origin"
-        ></iframe>
-        <iframe
-          src="https://www.youtube.com/embed/bu5YsOmr9P8?si=ORM8CBdO6F1XYVNg"
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-          className="w-full h-full rounded-xl shadow-lg"
-          referrerPolicy="strict-origin-when-cross-origin"
-        ></iframe>
-          </div>
+              src="https://www.youtube.com/embed/z59w-tEoHvE"
+              title="Video 1"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="w-full h-64 rounded-xl shadow-lg"
+            ></iframe>
 
+            <iframe
+              src="https://www.youtube.com/embed/lagkrvsELr8"
+              title="Video 2"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="w-full h-64 rounded-xl shadow-lg"
+            ></iframe>
+          </div>
         </div>
       </div>
     </section>
@@ -101,7 +107,7 @@ const TwitterSection = () => {
 };
 
 const HeartsAnimation = ({ containerRef }) => {
-  const hearts = Array.from({ length: 4 });
+  const hearts = Array.from({ length: 6 }); // Más corazones
 
   return (
     <>
@@ -111,9 +117,9 @@ const HeartsAnimation = ({ containerRef }) => {
           className="absolute text-purple-400 animate-heart"
           style={{
             left: `${10 + Math.random() * 80}%`,
-            bottom: '3px', 
+            bottom: `${60 + Math.random() * 40}px`, // 🔼 ahora flotan más arriba con leve variación
             fontSize: `${14 + Math.random() * 12}px`,
-            animationDelay: `${i * 1.5}s`,
+            animationDelay: `${i * 1.2}s`,
             animationDuration: `${5 + Math.random() * 3}s`,
             pointerEvents: 'none',
           }}
