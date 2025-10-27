@@ -77,7 +77,7 @@ const InfoScrollSection = () => {
   }, []);
 
   return (
-    <section className="w-full bg-black text-white">
+    <section className="w-full bg-black text-white" id="info">
       {sections.map((sec, index) => (
         <div
           key={index}

@@ -26,7 +26,7 @@ const TwitterSection = () => {
 
   return (
     <section
-      id="aviso"
+      id="avisos"
       ref={sectionRef}
       className="relative py-20 bg-gradient-to-b from-black to-gray-900 overflow-hidden md:pt-20"
     >

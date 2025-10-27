@@ -30,10 +30,10 @@ const Header = () => {
 
   const menuItems = [
     { name: 'Inicio', href: '#hero' },
-    { name: 'Sobre Nosotros', href: '#Programas' },
+    { name: 'Sobre Nosotros', href: '#info' },
     { name: 'Equipo', href: '#sobre' },
-    { name: 'Calendario', href: '#shorts' },
-    { name: 'Avisos', href: '#aviso' },
+    { name: 'Calendario', href: '#flyers' },
+    { name: 'Avisos', href: '#avisos' },
     { name: 'Contacto', href: '#contacto' },
   ];
 
