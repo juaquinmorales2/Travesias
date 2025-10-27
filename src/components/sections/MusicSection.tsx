@@ -95,7 +95,7 @@ const InfoScrollSection = () => {
           <div className="absolute inset-0 bg-black/70"></div>
 
           <div className="relative z-10 px-8 md:px-20 lg:px-32">
-            <h2 className="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-lg">
+            <h2 className="text-3xl md:text-6xl font-extrabold mb-6 drop-shadow-lg">
               {sec.title}
             </h2>
             <button
