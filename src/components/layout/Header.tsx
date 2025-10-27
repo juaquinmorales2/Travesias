@@ -53,7 +53,7 @@ return (
     >
       <div className="container mx-auto lg:pl-16 px-6 flex justify-between items-center">
         <a href="#" className="flex items-center gap-2">
-          <img src={logo} alt="Logo" className="h-12 w-24 md:h-16 mb-2 md:mt-1 mt-5 md:w-32 ml-2" />
+          <img src={logo} alt="Travesias Uruguay" className="h-12 w-24 md:h-16 mb-2 md:mt-1 mt-5 md:w-32 ml-2" />
         </a>
 
         <nav className="hidden lg:block mr-5">
@@ -88,7 +88,7 @@ return (
        }`}
       >
         <div className="flex justify-between items-center px-4 pt-6 pb-4">
-          <img src={logo} alt="Logo" className="h-6 w-24 ml-4 mt-2" />
+          <img src={logo} alt="Travesias Uruguay" className="h-6 w-24 ml-4 mt-2" />
           <button onClick={() => setIsOpen(false)} className="text-white" aria-label="Close Menu">
             <X size={28} />
           </button>
