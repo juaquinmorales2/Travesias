@@ -1,5 +1,6 @@
 import React from 'react';
 import HeroSection from '../components/sections/HeroSection';
+import Sponsors from '../components/sections/Sponsors';
 import MusicSection from '../components/sections/MusicSection';
 import AboutSection from '../components/sections/AboutSection';
 import TourSection from '../components/sections/TourSection';
@@ -10,6 +11,7 @@ const HomePage = () => {
   return (
     <>
       <HeroSection />
+      <Sponsors />
       <MusicSection />
       <AboutSection />
       <GallerySection />
