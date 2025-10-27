@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "description": "Travesías Uruguay - Organización de eventos deportivos de natación en aguas abiertas",
-  "host": "",
+  "keywords": ["travesias", "uruguay", "natacion", "aguas abiertas", "eventos deportivos"],
+  "host": "travesiasuruguay.com",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
