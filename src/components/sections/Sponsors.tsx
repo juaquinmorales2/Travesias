@@ -44,7 +44,7 @@ const SponsorsSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative h-[35vh] w-full bg-black text-white flex flex-col justify-center items-center overflow-hidden"
+      className="relative h-[35vh] w-full bg-black text-white flex flex-col justify-center items-center overflow-hidden md:pb-10 md:pt-[-20px]"
     >
       {/* Texto inicial */}
       <div
