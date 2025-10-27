@@ -27,7 +27,7 @@ const Modal = ({ onClose }: { onClose: () => void }) => {
         {/* Contenido del modal */}
         <div className="relative p-8 flex flex-col items-center gap-6 z-10">
           {/* Logo */}
-          <img src={logo} alt="Logo" className="w-32 h-auto mb-4 md:w-40 md:mb-6" />
+          <img src={logo} alt="Logo" className="w-24 h-auto mb-4 md:w-40 md:mb-6" />
 
           {/* Botón cerrar */}
           <button
