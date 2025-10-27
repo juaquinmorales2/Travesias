@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../sections/logow.png";
-import fondo from "../sections/Heromaybe.mp4";
+import fondo from "../public/Heromaybe.mp4";
 
 const Modal = ({ onClose }: { onClose: () => void }) => {
   return (
