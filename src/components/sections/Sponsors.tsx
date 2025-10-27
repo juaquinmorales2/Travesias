@@ -48,7 +48,7 @@ const SponsorsSection = () => {
     >
       {/* Texto inicial */}
       <div
-        className={`text-3xl md:text-5xl font-semibold mb-8 transition-opacity duration-1000 ${
+        className={`text-3xl md:mt-10 md:text-5xl font-semibold mb-8 transition-opacity duration-1000 ${
           showSponsors ? "opacity-0" : "opacity-100"
         }`}
       >
@@ -61,32 +61,37 @@ const SponsorsSection = () => {
           showSponsors ? "opacity-100" : "opacity-0"
         }`}
       >
-        <div className="animate-scrollSponsors flex gap-12 md:gap-16 px-8 items-center">
-          {sponsors.concat(sponsors).map((logo, i) => (
-            <div
-              key={i}
-              className="flex justify-center items-center w-32 md:w-48 h-24 md:h-32"
-            >
-              <img
-                src={logo}
-                alt={`Sponsor ${i + 1}`}
-                className="max-w-full max-h-full object-contain filter brightness-0 invert opacity-90 hover:opacity-100 transition-transform duration-300 hover:scale-110"
-              />
-            </div>
-          ))}
+        <div className="scroll-container flex">
+          <div className="scroll-content flex gap-12 md:gap-16 px-8 items-center">
+            {sponsors.concat(sponsors).map((logo, i) => (
+              <div
+                key={i}
+                className="flex justify-center items-center w-32 md:w-48 h-24 md:h-32"
+              >
+                <img
+                  src={logo}
+                  alt={`Sponsor ${i + 1}`}
+                  className="max-w-full max-h-full object-contain filter brightness-0 invert opacity-90 hover:opacity-100 transition-transform duration-300 hover:scale-110"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
       <style>{`
+        .scroll-container {
+          overflow: hidden;
+          width: 100%;
+        }
+        .scroll-content {
+          display: flex;
+          white-space: nowrap;
+          animation: scrollSponsors 25s linear infinite;
+        }
         @keyframes scrollSponsors {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
-        }
-        .animate-scrollSponsors {
-          animation: scrollSponsors 25s linear infinite;
-          display: flex;
-          align-items: center;
-          white-space: nowrap;
         }
       `}</style>
     </section>
