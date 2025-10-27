@@ -1,8 +1,8 @@
 import { useRef, useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { useInView } from '../../hooks/useInView';
-import Hero from '../sections/Hero.mp4';
-import HeroMobile from '../sections/Hero.mp4';
+import Hero from '../public/Heromaybe.mp4';
+import HeroMobile from '../public/Heromaybe.mp4';
 import TypingEffect from './TypingEffect';
 import Modal from './Modal';
 
@@ -66,7 +66,7 @@ const HeroSection = () => {
 
         <TypingEffect
           key="frase-1"
-          text="   ¨El movimiento es una medicina para crear el cambio físico, mental y emocional.¨   "
+          text="   La emoción por nadar nos lleva más lejos  "
           speed={50}
         />
 

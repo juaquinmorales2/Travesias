@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useInView } from '../../hooks/useInView';
-import navegando from './seba.jpg';
-import sinFiltros from './Diego.jpg';
+import navegando from './seba.png';
+import sinFiltros from './Diego.png';
 
 const sections = [
   {
