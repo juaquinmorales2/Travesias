@@ -9,13 +9,7 @@ const sections = [
     title: "INTRODUCCIÓN",
     image: introduccion,
     content: `Travesías Uruguay es una empresa dedicada a la organización de eventos deportivos de natación en aguas abiertas. Integrada por los Licenciados Pablo Olivera y Diego Chiriff, fundada en el 2018, la empresa ha crecido y consolidado su presencia en el calendario deportivo de nuestro país así como en Sudamérica. Comenzamos con un único evento y, con conocimiento, profesionalismo y dedicación, hoy celebramos 8 años de permanencia reafirmando nuestro compromiso con el deporte y la comunidad.
-    
-Combinamos de forma armónica dinamismo, deporte y conexión con el agua, representando visualmente el espíritu de nuestras competencias. Se destaca la silueta estilizada de un nadador en pleno movimiento, ejecutando una brazada, que simboliza el esfuerzo, la técnica y la pasión por la natación en aguas abiertas. Una serie de líneas curvas en tonos celeste evocan el movimiento del agua, transmitiendo fluidez, velocidad y la conexión directa con el entorno natural donde se desarrollan nuestros eventos.
-
-El nombre “TRAVESÍAS” aparece en tipografía mayúscula, sólida y moderna, con un estilo ligeramente desgastado que sugiere desafío, aventura y resistencia. El texto “URUGUAY” refuerza la identidad local del proyecto, en una fuente más limpia y clara, aportando equilibrio y profesionalismo al diseño.
-
-En conjunto, el logo transmite los valores centrales de la marca: deporte, naturaleza, desafío, superación, inclusión y pasión por el agua. Es una imagen potente y reconocible, ideal para representar eventos deportivos de alto impacto y atraer tanto a deportistas como a patrocinadores comprometidos con el desarrollo del deporte y la vida sana.`,
-  },
+   `,},
   {
     title: "SOBRE NOSOTROS",
     image: sobreNosotros,
@@ -25,8 +19,6 @@ En conjunto, el logo transmite los valores centrales de la marca: deporte, natur
     title: "MISIÓN Y VALORES",
     image: mision,
     content: `MISIÓN
-"El movimiento es una medicina para crear el cambio físico, emocional y mental" - Gene Tunney
-
 Ser el principal referente en eventos de natación en aguas abiertas en Uruguay y la región del Cono Sur, reconocidos por trascender la competencia para ofrecer experiencias transformadoras. Buscamos inspirar a una comunidad global a través de la pasión por el deporte y el profundo respeto por el medio ambiente.
 
 VALORES

@@ -73,7 +73,7 @@ const AboutSection = () => {
             >
               {/* Imagen */}
               <div
-                className={`lg:w-1/2 flex justify-center transition-all duration-1000 ${
+                className={`lg:w-1/2 w-[99%] flex justify-center transition-all duration-1000 ${
                   inView
                     ? 'opacity-100 translate-x-0'
                     : isImageLeft
