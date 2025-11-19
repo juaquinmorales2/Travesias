@@ -44,11 +44,11 @@ const SponsorsSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative h-[35vh] w-full bg-black text-white flex flex-col justify-center items-center overflow-hidden md:pb-10 md:pt-[-20px]"
+      className="relative h-[18vh] w-full bg-white text-black flex flex-col justify-center items-center overflow-hidden pb-16"
     >
       {/* Texto inicial */}
       <div
-        className={`text-3xl md:mt-10 md:text-5xl font-semibold mb-8 transition-opacity duration-1000 ${
+        className={`text-3xl md:pt-10 md:text-5xl font-semibold md:mb-[-30px] transition-opacity duration-4000 ${
           showSponsors ? "opacity-0" : "opacity-100"
         }`}
       >
@@ -57,7 +57,7 @@ const SponsorsSection = () => {
 
       {/* Carrusel de sponsors */}
       <div
-        className={`w-full flex justify-center items-center transition-opacity duration-1000 ${
+        className={`w-full flex justify-center items-center transition-opacity duration-4000 ${
           showSponsors ? "opacity-100" : "opacity-0"
         }`}
       >
@@ -71,7 +71,7 @@ const SponsorsSection = () => {
                 <img
                   src={logo}
                   alt={`Sponsor ${i + 1}`}
-                  className="max-w-full max-h-full object-contain filter brightness-0 invert opacity-90 hover:opacity-100 transition-transform duration-300 hover:scale-110"
+                  className="max-w-full max-h-full object-contain  opacity-90 hover:opacity-100 transition-transform duration-1000 hover:scale-110"
                 />
               </div>
             ))}
