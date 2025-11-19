@@ -34,7 +34,7 @@ const Modal = ({ onClose }: { onClose: () => void }) => {
               href="https://forms.gle/ih7nsjkL13HoXAZm8"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 bg-purple-600 hover:bg-purple-700 transition rounded-xl px-2 py-2 text-white font-semibold text-lg text-center shadow-lg flex items-center justify-center gap-2"
+              className="flex-1 bg-purple-600 hover:bg-purple-700 transition rounded-xl px-4 py-2 text-white font-semibold text-lg text-center shadow-lg flex items-center justify-center gap-2"
             >
               <img
                 src="https://images.emojiterra.com/google/android-11/1024px/1f4dd.png"
