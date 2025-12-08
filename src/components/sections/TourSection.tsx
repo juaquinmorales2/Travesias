@@ -4,18 +4,8 @@ import { useInView } from '../../hooks/useInView';
 const tweets = [
   {
     id: 1,
-    content: "Acá hay que poner",
-    date: "2025-05-20",
-  },
-  {
-    id: 2,
-    content: "Acá hay que poner algo",
-    date: "2025-05-18",
-  },
-  {
-    id: 3,
-    content: "Otros anuncios",
-    date: "2025-05-15",
+    content: "Link de fotos próximamente aqui...",
+    date: "2025-12-08",
   },
 ];
 

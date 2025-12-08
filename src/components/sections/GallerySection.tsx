@@ -1,13 +1,21 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { X } from "lucide-react";
-import ejemplo1 from "./ejemplo1.jpg";
+
+// Imágenes
+import ejemplo1 from "../public/laguna.png";
 import ejemplo2 from "./ejemplo2.jpg";
 import ejemplo3 from "./ejemplo3.jpg";
-import ejemplo4 from "./ejemplo4.jpg";
-import ejemplo5 from "./ejemplo5.jpg";
 import ejemplo6 from "./ejemplo6.jpg";
 import ejemplo7 from "./ejemplo7.jpg";
 import ejemplo8 from "./ejemplo8.jpg";
+
+// PDFs (asegúrate de que existan en /manuals/)
+import LagunaPDF from "../public/laguna.pdf";
+import PDA9PDF from "../public/laguna.pdf";
+import CaboPDF from "../public/laguna.pdf";
+import MinasPDF from "../public/laguna.pdf";
+import BallenaPDF from "../public/laguna.pdf";
+import GalaPDF from "../public/laguna.pdf";
 
 // --- Datos de eventos ---
 const flyers = [
@@ -17,13 +25,8 @@ const flyers = [
     date: "20 de diciembre 2025",
     location: "Punta del Este",
     img: ejemplo1,
-  },
-  {
-    id: 2,
-    title: "OW Full Moon Night",
-    date: "03 de enero 2026",
-    location: "Punta del Este",
-    img: ejemplo2,
+    inscripcion: "https://forms.gle/inscripcionLaguna",
+    manual: LagunaPDF,
   },
   {
     id: 3,
@@ -31,20 +34,17 @@ const flyers = [
     date: "17 de enero 2026",
     location: "Punta del Este",
     img: ejemplo3,
-  },
-  {
-    id: 4,
-    title: "Travesía Isla Gorriti",
-    date: "25 de enero 2026",
-    location: "Punta del Este",
-    img: ejemplo4,
+    inscripcion: "https://forms.gle/inscripcionPDA9",
+    manual: PDA9PDF,
   },
   {
     id: 5,
-    title: "OW Bajo las Estrellas",
-    date: "01 de febrero 2026",
-    location: "Punta del Este",
-    img: ejemplo5,
+    title: "Travesía Cabo Santa María",
+    date: "15 de febrero 2026",
+    location: "La Paloma",
+    img: ejemplo2,
+    inscripcion: "https://forms.gle/inscripcionCabo",
+    manual: CaboPDF,
   },
   {
     id: 6,
@@ -52,6 +52,8 @@ const flyers = [
     date: "21 de febrero 2026",
     location: "Minas",
     img: ejemplo6,
+    inscripcion: "https://forms.gle/inscripcionMinas",
+    manual: MinasPDF,
   },
   {
     id: 7,
@@ -59,6 +61,8 @@ const flyers = [
     date: "13 de marzo 2026",
     location: "Punta Ballena",
     img: ejemplo7,
+    inscripcion: "https://forms.gle/inscripcionBallena",
+    manual: BallenaPDF,
   },
   {
     id: 8,
@@ -66,6 +70,8 @@ const flyers = [
     date: "03 de abril 2026",
     location: "",
     img: ejemplo8,
+    inscripcion: "https://forms.gle/inscripcionGala",
+    manual: GalaPDF,
   },
 ];
 
@@ -190,25 +196,57 @@ export default function CalendarioEventos() {
                   {selectedEvent.location}
                 </p>
               )}
-              <a
-                href={`https://wa.me/59899930821?text=${encodeURIComponent(
-                  `Hola Diego, quiero participar del evento "${selectedEvent.title}" que se realizará el ${selectedEvent.date} en ${selectedEvent.location}.`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#25D366] text-black px-4 py-2 rounded-full font-semibold hover:scale-105 transition-transform"
-              >
-                {/* Ícono de WhatsApp */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  className="w-5 h-5"
+
+              {/* BOTONES */}
+              <div className="flex flex-col items-center justify-center gap-5 p-2">
+
+                {/* Dos botones arriba */}
+                <div className="flex gap-4 w-full">
+
+                  {/* Inscripción */}
+                  <a
+                    href={selectedEvent.inscripcion}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 bg-purple-600 hover:bg-purple-700 transition rounded-xl px-4 py-2 text-white font-semibold text-lg text-center shadow-lg flex items-center justify-center gap-2"
+                  >
+                    <img
+                      src="https://images.emojiterra.com/google/android-11/1024px/1f4dd.png"
+                      className="w-6 h-6"
+                      alt="Google Forms"
+                    />
+                    Inscribirme
+                  </a>
+
+                  {/* Manual */}
+                  <a
+                    href={selectedEvent.manual}
+                    download={`Manual-${selectedEvent.title}.pdf`}
+                    className="flex-1 bg-blue-600 hover:bg-blue-700 transition rounded-xl px-2 py-2 text-white font-semibold text-lg text-center shadow-lg flex items-center justify-center gap-2"
+                  >
+                    📘 Manual
+                  </a>
+
+                </div>
+
+                {/* Botón WhatsApp */}
+                <a
+                  href={`https://wa.me/59899930821?text=${encodeURIComponent(
+                    `Hola, quiero más información sobre el evento "${selectedEvent.title}" del ${selectedEvent.date}.`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-green-600 hover:bg-green-700 transition rounded-xl px-4 py-3 text-white font-semibold text-lg text-center shadow-lg flex items-center justify-center gap-3"
                 >
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.1-.472-.149-.67.15-.198.297-.768.967-.94 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.447-.52.149-.173.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.204-.242-.58-.487-.502-.67-.511l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.693.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.52-5.287c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.896a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.875 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.893c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.88 11.88 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 0 0-3.474-8.46Z" />
-                </svg>
-                Contactar por WhatsApp
-              </a>
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+                    className="w-7 h-7"
+                    alt="WhatsApp"
+                  />
+                  Más información
+                </a>
+
+              </div>
             </div>
           </div>
         </div>
@@ -227,11 +265,6 @@ export default function CalendarioEventos() {
         @keyframes scaleUp {
           from { transform: scale(0.8); opacity: 0; }
           to { transform: scale(1); opacity: 1; }
-        }
-        .animate-section {
-          opacity: 1 !important;
-          transform: translateY(0) !important;
-          animation: fadeInUp 1s ease-out forwards;
         }
       `}</style>
     </section>
