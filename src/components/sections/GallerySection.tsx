@@ -3,19 +3,17 @@ import { X } from "lucide-react";
 
 // Imágenes
 import ejemplo1 from "../public/laguna.png";
-import ejemplo2 from "./ejemplo2.jpg";
-import ejemplo3 from "./ejemplo3.jpg";
-import ejemplo6 from "./ejemplo6.jpg";
-import ejemplo7 from "./ejemplo7.jpg";
+import ejemplo2 from "../public/cabo.jpg";
+import ejemplo3 from "../public/puntamaraton.jpg";
+import ejemplo6 from "../public/sierraminas.jpg";
+import ejemplo7 from "../public/puntaballena.jpg";
 import ejemplo8 from "./ejemplo8.jpg";
 
 // PDFs (asegúrate de que existan en /manuals/)
 import LagunaPDF from "../public/laguna.pdf";
-import PDA9PDF from "../public/laguna.pdf";
-import CaboPDF from "../public/laguna.pdf";
-import MinasPDF from "../public/laguna.pdf";
-import BallenaPDF from "../public/laguna.pdf";
-import GalaPDF from "../public/laguna.pdf";
+import PDA9PDF from "../public/inter.pdf";
+import MinasPDF from "../public/sierraminas.pdf";
+import BallenaPDF from "../public/puntaballena.pdf";
 
 // --- Datos de eventos ---
 const flyers = [
@@ -44,7 +42,6 @@ const flyers = [
     location: "La Paloma",
     img: ejemplo2,
     inscripcion: "https://forms.gle/inscripcionCabo",
-    manual: CaboPDF,
   },
   {
     id: 6,
@@ -71,7 +68,6 @@ const flyers = [
     location: "",
     img: ejemplo8,
     inscripcion: "https://forms.gle/inscripcionGala",
-    manual: GalaPDF,
   },
 ];
 
@@ -145,13 +141,12 @@ export default function CalendarioEventos() {
                     className="relative rounded-2xl overflow-hidden border-4 border-teal-400 cursor-pointer hover:scale-[1.02] transition-transform opacity-0 translate-y-6 animate-[fadeInUp_0.7s_ease-out_forwards]"
                     style={{
                       animationDelay: `${i * 0.2}s`,
-                      aspectRatio: "16/9",
                     }}
                   >
                     <img
                       src={ev.img}
                       alt={ev.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-auto object-contain"
                     />
                     <div className="absolute inset-0 bg-black/40 flex flex-col justify-between p-4">
                       <div className="flex justify-end">
@@ -159,9 +154,31 @@ export default function CalendarioEventos() {
                           {ev.date.split(" ")[0]}
                         </span>
                       </div>
-                      <div>
-                        <h4 className="font-bold text-lg">{ev.title}</h4>
-                        <p className="text-sm opacity-80">{ev.location}</p>
+                      <div><h4
+  className="font-bold text-3xl"
+  style={{
+    color: "white",
+    textShadow: `
+      -1px -1px 0 #000,  
+       1px -1px 0 #000,
+      -1px  1px 0 #000,
+       1px  1px 0 #000
+    `
+  }}
+>
+  {ev.title}
+</h4>
+
+
+                        <p className="text-sm opacity-80"style={{
+    color: "white",
+    textShadow: `
+      -1px -1px 0 #000,  
+       1px -1px 0 #000,
+      -1px  1px 0 #000,
+       1px  1px 0 #000
+    `
+  }}>{ev.location}</p>
                       </div>
                     </div>
                   </div>
@@ -174,83 +191,75 @@ export default function CalendarioEventos() {
 
       {/* MODAL */}
       {selectedEvent && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-[fadeIn_0.3s_ease-out_forwards]">
-          <div className="relative bg-gray-900 rounded-2xl overflow-hidden max-w-lg w-full shadow-2xl animate-[scaleUp_0.4s_ease-out_forwards]">
-            <button
-              onClick={() => setSelectedEvent(null)}
-              className="absolute top-3 right-3 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+  <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-[fadeIn_0.3s_ease-out_forwards]">
+    <div className="relative bg-gray-900 rounded-2xl overflow-hidden max-w-lg w-full max-h-[120vh] shadow-2xl animate-[scaleUp_0.4s_ease-out_forwards] flex flex-col">
+      <button
+        onClick={() => setSelectedEvent(null)}
+        className="absolute top-3 right-3 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full z-10"
+      >
+        <X size={20} />
+      </button>
+
+      <div className="overflow-y-auto p-5 flex-1 flex flex-col gap-4">
+        <img
+          src={selectedEvent.img}
+          alt={selectedEvent.title}
+          className="w-full h-auto max-h-64 object-contain mx-auto"
+        />
+
+        <h3 className="text-2xl font-bold">{selectedEvent.title}</h3>
+        <p className="text-sm text-gray-300">{selectedEvent.date}</p>
+        {selectedEvent.location && (
+          <p className="text-sm text-gray-400">{selectedEvent.location}</p>
+        )}
+
+        {/* BOTONES */}
+        <div className="flex flex-col items-center justify-center gap-4 mt-4">
+          <div className="flex gap-4 w-full">
+            <a
+              href={selectedEvent.inscripcion}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 bg-purple-600 hover:bg-purple-700 transition rounded-xl px-4 py-2 text-white font-semibold text-lg text-center shadow-lg flex items-center justify-center gap-2"
             >
-              <X size={20} />
-            </button>
+              <img
+                src="https://images.emojiterra.com/google/android-11/1024px/1f4dd.png"
+                className="w-6 h-6"
+                alt="Google Forms"
+              />
+              Inscribirme
+            </a>
 
-            <img
-              src={selectedEvent.img}
-              alt={selectedEvent.title}
-              className="w-full h-64 object-cover"
-            />
-            <div className="p-5">
-              <h3 className="text-2xl font-bold mb-2">{selectedEvent.title}</h3>
-              <p className="text-sm text-gray-300 mb-5">{selectedEvent.date}</p>
-              {selectedEvent.location && (
-                <p className="text-sm text-gray-400 mb-4">
-                  {selectedEvent.location}
-                </p>
-              )}
-
-              {/* BOTONES */}
-              <div className="flex flex-col items-center justify-center gap-5 p-2">
-
-                {/* Dos botones arriba */}
-                <div className="flex gap-4 w-full">
-
-                  {/* Inscripción */}
-                  <a
-                    href={selectedEvent.inscripcion}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 bg-purple-600 hover:bg-purple-700 transition rounded-xl px-4 py-2 text-white font-semibold text-lg text-center shadow-lg flex items-center justify-center gap-2"
-                  >
-                    <img
-                      src="https://images.emojiterra.com/google/android-11/1024px/1f4dd.png"
-                      className="w-6 h-6"
-                      alt="Google Forms"
-                    />
-                    Inscribirme
-                  </a>
-
-                  {/* Manual */}
-                  <a
-                    href={selectedEvent.manual}
-                    download={`Manual-${selectedEvent.title}.pdf`}
-                    className="flex-1 bg-blue-600 hover:bg-blue-700 transition rounded-xl px-2 py-2 text-white font-semibold text-lg text-center shadow-lg flex items-center justify-center gap-2"
-                  >
-                    📘 Manual
-                  </a>
-
-                </div>
-
-                {/* Botón WhatsApp */}
-                <a
-                  href={`https://wa.me/59899930821?text=${encodeURIComponent(
-                    `Hola, quiero más información sobre el evento "${selectedEvent.title}" del ${selectedEvent.date}.`
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full bg-green-600 hover:bg-green-700 transition rounded-xl px-4 py-3 text-white font-semibold text-lg text-center shadow-lg flex items-center justify-center gap-3"
-                >
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-                    className="w-7 h-7"
-                    alt="WhatsApp"
-                  />
-                  Más información
-                </a>
-
-              </div>
-            </div>
+            <a
+              href={selectedEvent.manual}
+              download={`Manual-${selectedEvent.title}.pdf`}
+              className="flex-1 bg-blue-600 hover:bg-blue-700 transition rounded-xl px-2 py-2 text-white font-semibold text-lg text-center shadow-lg flex items-center justify-center gap-2"
+            >
+              📘 Manual
+            </a>
           </div>
+
+          <a
+            href={`https://wa.me/59899930821?text=${encodeURIComponent(
+              `Hola, quiero más información sobre el evento "${selectedEvent.title}" del ${selectedEvent.date}.`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full bg-green-600 hover:bg-green-700 transition rounded-xl px-4 py-3 text-white font-semibold text-lg text-center shadow-lg flex items-center justify-center gap-3"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+              className="w-7 h-7"
+              alt="WhatsApp"
+            />
+            Más información
+          </a>
         </div>
-      )}
+      </div>
+    </div>
+  </div>
+)}
+
 
       {/* --- Animaciones personalizadas --- */}
       <style>{`
