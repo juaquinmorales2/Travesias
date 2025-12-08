@@ -11,6 +11,18 @@ import ejemplo9 from "./sponsors/rnx.png";
 import ejemplo10 from "./sponsors/vikinga.png";
 import ejemplo11 from "./sponsors/viva.png";
 
+import ejemplo12 from "./sponsors/talar.jpg";
+import ejemplo13 from "./sponsors/rocha.jpg";
+import ejemplo14 from "./sponsors/atlantico.jpg";
+import ejemplo15 from "./sponsors/clap.jpg";
+import ejemplo16 from "./sponsors/garmin.jpg";
+import ejemplo17 from "./sponsors/naval.jpg";
+import ejemplo18 from "./sponsors/ferreteria.jpg";
+import ejemplo19 from "./sponsors/werness.jpg";
+import ejemplo20 from "./sponsors/alfajores.jpg";
+
+
+
 const SponsorsSection = () => {
   const sectionRef = useRef(null);
   const [showSponsors, setShowSponsors] = useState(false);
@@ -27,6 +39,16 @@ const SponsorsSection = () => {
     ejemplo9,
     ejemplo10,
     ejemplo11,
+    ejemplo12,
+    ejemplo13,
+    ejemplo14,
+    ejemplo15,
+    ejemplo16,
+    ejemplo17,
+    ejemplo18,
+    ejemplo19,
+    ejemplo20,
+
   ];
 
   useEffect(() => {
