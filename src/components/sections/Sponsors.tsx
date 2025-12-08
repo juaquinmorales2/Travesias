@@ -21,6 +21,12 @@ import ejemplo18 from "./sponsors/ferreteria.jpg";
 import ejemplo19 from "./sponsors/werness.jpg";
 import ejemplo20 from "./sponsors/alfajores.jpg";
 
+import ejemplo21 from "./sponsors/jazz.jpg";
+import ejemplo22 from "./sponsors/lapataia.jpg";
+import ejemplo23 from "./sponsors/municipio.jpg";
+import ejemplo24 from "./sponsors/nutri.jpg";
+
+
 
 
 const SponsorsSection = () => {
@@ -48,6 +54,10 @@ const SponsorsSection = () => {
     ejemplo18,
     ejemplo19,
     ejemplo20,
+    ejemplo21,
+    ejemplo22,
+    ejemplo23,
+    ejemplo24,
 
   ];
 
