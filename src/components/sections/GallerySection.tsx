@@ -18,7 +18,7 @@ import BallenaPDF from "../public/puntaballena.pdf";
 // --- Datos de eventos ---
 const flyers = [
   { id: 1, title: "8ª Edición Travesía Internacional Laguna del Sauce", date: "20 de diciembre 2025", location: "Punta del Este", img: ejemplo1, inscripcion: "https://forms.gle/inscripcionLaguna", manual: LagunaPDF },
-  { id: 3, title: "2ª Edición Travesía Internacional PDA 9 Playa Deportiva", date: "17 de enero 2026", location: "Punta del Este", img: ejemplo3, inscripcion: "https://docs.google.com/forms/d/e/1FAIpQLSc8E_wQIR4XdHN1DjVCs1qrQibFEspj-OSlVicAoCjgDjW0fw/viewform", manual: PDA9PDF },
+  { id: 3, title: "2ª Edición Punta Maratón Internacional PDA 9 Playa Mansa", date: "17 de enero 2026", location: "Punta del Este", img: ejemplo3, inscripcion: "https://docs.google.com/forms/d/e/1FAIpQLSc8E_wQIR4XdHN1DjVCs1qrQibFEspj-OSlVicAoCjgDjW0fw/viewform", manual: PDA9PDF },
   { id: 5, title: "Travesía Cabo Santa María", date: "15 de febrero 2026", location: "La Paloma", img: ejemplo2 },
   { id: 6, title: "4ª Edición Travesía Internacional Sierra de Minas", date: "21 de febrero 2026", location: "Minas", img: ejemplo6, inscripcion: "https://forms.gle/FvQgnCnjQ6Shw6Nw7", manual: MinasPDF },
   { id: 7, title: "5ª Edición Punta Ballena Cup", date: "13 de marzo 2026", location: "Punta Ballena", img: ejemplo7, inscripcion: "https://forms.gle/XD4ZtYBiZk8hfYMZ9", manual: BallenaPDF },
