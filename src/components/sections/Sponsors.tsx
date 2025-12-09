@@ -10,7 +10,6 @@ import ejemplo8 from "./sponsors/pbi.png";
 import ejemplo9 from "./sponsors/rnx.png";
 import ejemplo10 from "./sponsors/vikinga.png";
 import ejemplo11 from "./sponsors/viva.png";
-
 import ejemplo12 from "./sponsors/talar.jpg";
 import ejemplo13 from "./sponsors/rocha.jpg";
 import ejemplo14 from "./sponsors/atlantico.jpg";
@@ -20,11 +19,13 @@ import ejemplo17 from "./sponsors/naval.jpg";
 import ejemplo18 from "./sponsors/ferreteria.jpg";
 import ejemplo19 from "./sponsors/werness.jpg";
 import ejemplo20 from "./sponsors/alfajores.jpg";
-
 import ejemplo21 from "./sponsors/jazz.jpg";
 import ejemplo22 from "./sponsors/lapataia.jpg";
 import ejemplo23 from "./sponsors/municipio.jpg";
 import ejemplo24 from "./sponsors/nutri.jpg";
+import ejemplo25 from "./sponsors/irisarri.jpg";
+import ejemplo26 from "./sponsors/museo.jpg";
+import ejemplo27 from "./sponsors/Casa.png";
 
 
 
@@ -58,6 +59,9 @@ const SponsorsSection = () => {
     ejemplo22,
     ejemplo23,
     ejemplo24,
+    ejemplo25,
+    ejemplo26,
+    ejemplo27,
 
   ];
 
