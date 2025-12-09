@@ -27,6 +27,10 @@ import ejemplo25 from "./sponsors/irisarri.jpg";
 import ejemplo26 from "./sponsors/museo.jpg";
 import ejemplo27 from "./sponsors/Casa.png";
 
+import ejemplo28 from "./sponsors/Lavalleja.jpg";
+import ejemplo29 from "./sponsors/umami.png";
+
+
 
 
 
@@ -62,6 +66,8 @@ const SponsorsSection = () => {
     ejemplo25,
     ejemplo26,
     ejemplo27,
+    ejemplo28,
+    ejemplo29,
 
   ];
 
@@ -84,18 +90,16 @@ const SponsorsSection = () => {
     >
       {/* Texto inicial */}
       <div
-        className={`text-3xl md:pt-10 md:text-5xl font-semibold md:mb-[-30px] transition-opacity duration-4000 ${
-          showSponsors ? "opacity-0" : "opacity-100"
-        }`}
+        className={`text-3xl md:pt-10 md:text-5xl font-semibold md:mb-[-30px] transition-opacity duration-4000 ${showSponsors ? "opacity-0" : "opacity-100"
+          }`}
       >
         Con el apoyo de
       </div>
 
       {/* Carrusel de sponsors */}
       <div
-        className={`w-full flex justify-center items-center transition-opacity duration-4000 ${
-          showSponsors ? "opacity-100" : "opacity-0"
-        }`}
+        className={`w-full flex justify-center items-center transition-opacity duration-4000 ${showSponsors ? "opacity-100" : "opacity-0"
+          }`}
       >
         <div className="scroll-container flex">
           <div className="scroll-content flex gap-12 md:gap-16 px-8 items-center">
@@ -107,7 +111,7 @@ const SponsorsSection = () => {
                 <img
                   src={logo}
                   alt={`Sponsor ${i + 1}`}
-                  className="max-w-full max-h-full object-contain  opacity-90 hover:opacity-100 transition-transform duration-1000 hover:scale-110"
+                  className={`max-w-full max-h-full object-contain opacity-90 hover:opacity-100 transition-transform duration-1000 hover:scale-110 ${[0, 8, 9, 28].includes(i % sponsors.length) ? "logo-outline" : ""} `}
                 />
               </div>
             ))}
@@ -116,21 +120,32 @@ const SponsorsSection = () => {
       </div>
 
       <style>{`
-        .scroll-container {
-          overflow: hidden;
-          width: 100%;
-        }
-        .scroll-content {
-          display: flex;
-          white-space: nowrap;
-          animation: scrollSponsors 25s linear infinite;
-        }
-        @keyframes scrollSponsors {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-      `}</style>
+    .scroll-container {
+      overflow: hidden;
+      width: 100%;
+    }
+    .scroll-content {
+      display: flex;
+      white-space: nowrap;
+      animation: scrollSponsors 25s linear infinite;
+    }
+    @keyframes scrollSponsors {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* --- 🔥 Contorno NEGRO real del logo (no del contenedor) --- */
+    .logo-outline {
+      filter: drop-shadow(0 0 1px black) drop-shadow(0 0 3px black);
+    }
+
+    /* Opcional: borde más grueso estilo stroke */
+    /* .logo-outline {
+      filter: drop-shadow(0 0 2px black) drop-shadow(0 0 6px black);
+    } */
+  `}</style>
     </section>
+
   );
 };
 
