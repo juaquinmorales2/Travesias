@@ -68,7 +68,6 @@ const Modal = ({ onClose }: { onClose: () => void }) => {
             />
             Más información
           </a>
-
         </div>
       </div>
     </div>

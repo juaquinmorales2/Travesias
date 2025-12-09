@@ -26,13 +26,8 @@ import ejemplo24 from "./sponsors/nutri.jpg";
 import ejemplo25 from "./sponsors/irisarri.jpg";
 import ejemplo26 from "./sponsors/museo.jpg";
 import ejemplo27 from "./sponsors/Casa.png";
-
 import ejemplo28 from "./sponsors/Lavalleja.jpg";
 import ejemplo29 from "./sponsors/umami.png";
-
-
-
-
 
 const SponsorsSection = () => {
   const sectionRef = useRef(null);
@@ -68,7 +63,6 @@ const SponsorsSection = () => {
     ejemplo27,
     ejemplo28,
     ejemplo29,
-
   ];
 
   useEffect(() => {
@@ -86,19 +80,21 @@ const SponsorsSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative h-[22vh] w-full bg-white text-black flex flex-col justify-center items-center overflow-hidden pb-16"
+      className="relative h-[22vh] md:h-[18vh] w-full bg-white text-black 
+      flex flex-col justify-center items-center overflow-hidden pb-16"
     >
       {/* Texto inicial */}
       <div
-        className={`text-3xl md:pt-10 md:text-5xl font-semibold md:mb-[-30px] transition-opacity duration-4000 ${showSponsors ? "opacity-0" : "opacity-100"
+        className={`text-3xl md:pt-10 md:text-5xl font-semibold md:mb-[-30px] transition-opacity 
+          duration-4000 ${showSponsors ? "opacity-0" : "opacity-100"
           }`}
       >
         Con el apoyo de
       </div>
-
       {/* Carrusel de sponsors */}
       <div
-        className={`w-full flex justify-center items-center transition-opacity duration-4000 ${showSponsors ? "opacity-100" : "opacity-0"
+        className={`w-full flex justify-center items-center transition-opacity 
+          duration-4000 ${showSponsors ? "opacity-100" : "opacity-0"
           }`}
       >
         <div className="scroll-container flex">
@@ -111,14 +107,15 @@ const SponsorsSection = () => {
                 <img
                   src={logo}
                   alt={`Sponsor ${i + 1}`}
-                  className={`max-w-full max-h-full object-contain opacity-90 hover:opacity-100 transition-transform duration-1000 hover:scale-110 ${[0, 8, 9, 28].includes(i % sponsors.length) ? "logo-outline" : ""} `}
+                  className={`max-w-full max-h-full object-contain opacity-90 hover:opacity-100 
+                    transition-transform duration-1000 hover:scale-110 
+                    ${[0, 8, 9, 28].includes(i % sponsors.length) ? "logo-outline" : ""} `}
                 />
               </div>
             ))}
           </div>
         </div>
       </div>
-
       <style>{`
     .scroll-container {
       overflow: hidden;
@@ -145,7 +142,6 @@ const SponsorsSection = () => {
     } */
   `}</style>
     </section>
-
   );
 };
 
