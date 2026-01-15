@@ -8,6 +8,7 @@ const EventsPage = () => {
     const [events, setEvents] = useState<Event[]>([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingEvent, setEditingEvent] = useState<Event | null>(null);
+    const [uploading, setUploading] = useState(false);
     const [formData, setFormData] = useState({
         title: '',
         date: '',
@@ -18,6 +19,47 @@ const EventsPage = () => {
         registrationLink: '',
         manualUrl: '',
     });
+
+    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, type: 'image' | 'manual') => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        try {
+            setUploading(true);
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${type}s/${Date.now()}.${fileExt}`;
+
+            // Assuming 'eventsService' doesn't have direct upload, we use supabase client from service or import it
+            // Let's assume we import supabase here or use a helper. 
+            // Since I don't see 'supabase' imported, I need to add that import at top. 
+            // For now, I'll use the 'eventsService' if it had upload, but it likely doesn't.
+            // I will use direct fetch to the supabase URL if simple, or better yet, import supabase client.
+
+            // To be safe, I'll blindly add the import in a separate call if needed, but for now let's modify the imports too.
+            const { supabase } = await import('../../lib/supabase'); // Dynamic import to avoid breaking changes if not at top yet
+
+            const { error: uploadError } = await supabase.storage
+                .from('images') // We use the same 'images' bucket for everything
+                .upload(fileName, file);
+
+            if (uploadError) throw uploadError;
+
+            const { data: { publicUrl } } = supabase.storage
+                .from('images')
+                .getPublicUrl(fileName);
+
+            setFormData(prev => ({
+                ...prev,
+                [type === 'image' ? 'imageUrl' : 'manualUrl']: publicUrl
+            }));
+
+        } catch (error) {
+            console.error('Error uploading file:', error);
+            alert('Error al subir el archivo');
+        } finally {
+            setUploading(false);
+        }
+    };
 
     useEffect(() => {
         loadEvents();
@@ -267,17 +309,33 @@ const EventsPage = () => {
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-300 mb-2">
-                                        URL de Imagen
-                                    </label>
-                                    <input
-                                        type="url"
-                                        name="imageUrl"
-                                        value={formData.imageUrl}
-                                        onChange={handleInputChange}
-                                        className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-teal-400"
-                                        placeholder="https://ejemplo.com/imagen.jpg"
-                                    />
+                                    <div className="space-y-2">
+                                        <div className="flex gap-2">
+                                            <input
+                                                type="url"
+                                                name="imageUrl"
+                                                value={formData.imageUrl}
+                                                onChange={handleInputChange}
+                                                className="flex-1 px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-teal-400"
+                                                placeholder="https://ejemplo.com/imagen.jpg"
+                                            />
+                                        </div>
+                                        <div className="flex items-center gap-4">
+                                            <input
+                                                type="file"
+                                                accept="image/*"
+                                                onChange={(e) => handleFileUpload(e, 'image')}
+                                                className="block w-full text-sm text-gray-400
+                                                    file:mr-4 file:py-2 file:px-4
+                                                    file:rounded-full file:border-0
+                                                    file:text-sm file:font-semibold
+                                                    file:bg-teal-500/20 file:text-teal-400
+                                                    hover:file:bg-teal-500/30
+                                                "
+                                            />
+                                            {uploading && <span className="text-sm text-teal-400 animate-pulse">Subiendo...</span>}
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div>
@@ -296,16 +354,33 @@ const EventsPage = () => {
 
                                 <div>
                                     <label className="block text-sm font-medium text-gray-300 mb-2">
-                                        URL del Manual (PDF)
+                                        Manual del Evento (PDF)
                                     </label>
-                                    <input
-                                        type="url"
-                                        name="manualUrl"
-                                        value={formData.manualUrl}
-                                        onChange={handleInputChange}
-                                        className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-teal-400"
-                                        placeholder="/manual.pdf o https://ejemplo.com/manual.pdf"
-                                    />
+                                    <div className="space-y-2">
+                                        <input
+                                            type="url"
+                                            name="manualUrl"
+                                            value={formData.manualUrl}
+                                            onChange={handleInputChange}
+                                            className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-teal-400"
+                                            placeholder="/manual.pdf o https://ejemplo.com/manual.pdf"
+                                        />
+                                        <div className="flex items-center gap-4">
+                                            <input
+                                                type="file"
+                                                accept=".pdf"
+                                                onChange={(e) => handleFileUpload(e, 'manual')}
+                                                className="block w-full text-sm text-gray-400
+                                                    file:mr-4 file:py-2 file:px-4
+                                                    file:rounded-full file:border-0
+                                                    file:text-sm file:font-semibold
+                                                    file:bg-blue-500/20 file:text-blue-400
+                                                    hover:file:bg-blue-500/30
+                                                "
+                                            />
+                                            {uploading && <span className="text-sm text-blue-400 animate-pulse">Subiendo PDF...</span>}
+                                        </div>
+                                    </div>
                                     <p className="text-xs text-gray-500 mt-1">Ruta relativa o URL completa del PDF del manual del evento</p>
                                 </div>
 
