@@ -84,8 +84,8 @@ const ModalsPage = () => {
                                 type="button"
                                 onClick={() => setFormData(prev => ({ ...prev, active: !prev.active }))}
                                 className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors ${formData.active
-                                        ? 'bg-green-500/20 text-green-400 border border-green-500/50'
-                                        : 'bg-red-500/20 text-red-400 border border-red-500/50'
+                                    ? 'bg-green-500/20 text-green-400 border border-green-500/50'
+                                    : 'bg-red-500/20 text-red-400 border border-red-500/50'
                                     }`}
                             >
                                 {formData.active ? <><Eye size={18} /> Visible</> : <><EyeOff size={18} /> Oculto</>}
@@ -144,6 +144,20 @@ const ModalsPage = () => {
                                     placeholder="https://..."
                                 />
                             </div>
+                        </div>
+
+                        {/* Configuración Adicional */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-300 mb-2">Retraso de aparición (segundos)</label>
+                            <input
+                                type="number"
+                                min="0"
+                                max="60"
+                                value={formData.delay || 0}
+                                onChange={e => setFormData(prev => ({ ...prev, delay: parseInt(e.target.value) || 0 }))}
+                                className="w-full md:w-32 bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-teal-500 outline-none"
+                            />
+                            <p className="text-xs text-gray-400 mt-1">Tiempo que espera el modal antes de aparecer al entrar a la web.</p>
                         </div>
 
                         {/* Submit */}

@@ -34,6 +34,18 @@ import img28 from '../../components/sections/sponsors/vikinga.png';
 import img29 from '../../components/sections/sponsors/viva.png';
 import img30 from '../../components/sections/sponsors/werness.jpg';
 
+// Event Assets
+// Note: Adapting paths based on previous finds (src/components/public)
+import caboImg from '../../components/public/cabo.jpg';
+import sierraImg from '../../components/public/sierraminas.jpg';
+import puntaBallenaImg from '../../components/public/puntaballena.jpg';
+import ejemplo8Img from '../../components/sections/sponsors/clap.jpg'; // Using a placeholder if original not found perfectly matches
+import puntamaratonImg from '../../components/public/puntamaraton.jpg';
+
+// PDFs (Assuming they are in same folder or similar)
+// If I can't find them, I will skip upload or use placeholders
+// import interPdf from '../../components/public/inter.pdf';
+
 const sponsorsData = [
     { name: 'Casa', src: img1, file: 'Casa.png' },
     { name: 'Lavalleja', src: img2, file: 'Lavalleja.jpg' },
@@ -160,6 +172,116 @@ const MigrationPage = () => {
 
                 } catch (e: any) {
                     logMsg(`Error inesperado en ${sponsor.name}: ${e.message}`);
+                }
+            }
+
+            // 3. Migrate Events
+            logMsg('Migrando Eventos...');
+            const eventsData = [
+                {
+                    title: '2ª Edición Punta Maratón Internacional PDA 9 Playa Mansa',
+                    date: '2026-01-17', // Converted to YYYY-MM-DD
+                    location: 'Punta del Este',
+                    description: '2ª Edición Punta Maratón Internacional PDA 9 Playa Mansa - Una travesía internacional en las aguas de Punta del Este.',
+                    distance: 'Varias distancias',
+                    file_source: puntamaratonImg,
+                    file_name: 'puntamaraton.jpg',
+                    image_url: '',
+                    registration_link: 'https://docs.google.com/forms/d/e/1FAIpQLSc8E_wQIR4XdHN1DjVCs1qrQibFEspj-OSlVicAoCjgDjW0fw/viewform',
+                    manual_url: ''
+                },
+                {
+                    title: 'Travesía Cabo Santa María',
+                    date: '2026-02-15',
+                    location: 'La Paloma',
+                    description: 'Travesía Cabo Santa María - Una experiencia única nadando en las aguas de La Paloma.',
+                    distance: 'Varias distancias',
+                    file_source: caboImg,
+                    file_name: 'cabo.jpg',
+                    image_url: '',
+                    registration_link: '',
+                    manual_url: ''
+                },
+                {
+                    title: '4ª Edición Travesía Internacional Sierra de Minas',
+                    date: '2026-02-21',
+                    location: 'Minas',
+                    description: '4ª Edición Travesía Internacional Sierra de Minas - Evento internacional de natación en aguas abiertas.',
+                    distance: 'Varias distancias',
+                    file_source: sierraImg,
+                    file_name: 'sierraminas.jpg',
+                    image_url: '',
+                    registration_link: 'https://forms.gle/FvQgnCnjQ6Shw6Nw7',
+                    manual_url: ''
+                },
+                {
+                    title: '5ª Edición Punta Ballena Cup',
+                    date: '2026-03-13',
+                    location: 'Punta Ballena',
+                    description: '5ª Edición Punta Ballena Cup - Copa de natación en aguas abiertas en Punta Ballena.',
+                    distance: 'Varias distancias',
+                    file_source: puntaBallenaImg,
+                    file_name: 'puntaballena.jpg',
+                    image_url: '',
+                    registration_link: 'https://forms.gle/XD4ZtYBiZk8hfYMZ9',
+                    manual_url: ''
+                },
+                {
+                    title: 'Gala de Premiación 2026',
+                    date: '2026-04-03',
+                    location: 'Punta del Este',
+                    description: 'Gala de Premiación 2026 - Ceremonia de premiación para celebrar los logros de la temporada.',
+                    distance: 'N/A',
+                    file_source: ejemplo8Img,
+                    file_name: 'gala.jpg',
+                    image_url: '',
+                    registration_link: '',
+                    manual_url: ''
+                }
+            ];
+
+            for (const event of eventsData) {
+                const { data: existingEvent } = await supabase
+                    .from('events')
+                    .select('id')
+                    .eq('title', event.title)
+                    .single();
+
+                if (!existingEvent) {
+                    // Upload Image
+                    if (event.file_source) {
+                        try {
+                            const response = await fetch(event.file_source);
+                            const blob = await response.blob();
+                            const file = new File([blob], event.file_name, { type: blob.type });
+                            const fileName = `events/${event.file_name}`;
+
+                            const { error: uploadError } = await supabase.storage
+                                .from('images')
+                                .upload(fileName, file, { upsert: true });
+
+                            if (!uploadError) {
+                                const { data: { publicUrl } } = supabase.storage
+                                    .from('images')
+                                    .getPublicUrl(fileName);
+                                event.image_url = publicUrl;
+                            }
+                        } catch (e: any) {
+                            logMsg(`Error subiendo imagen de evento ${event.title}: ${e.message}`);
+                        }
+                    }
+
+                    // Remove internal fields
+                    const { file_source, file_name, ...dbEvent } = event as any;
+
+                    const { error: eventError } = await supabase
+                        .from('events')
+                        .insert([dbEvent]);
+
+                    if (eventError) logMsg(`Error creando evento ${event.title}: ${eventError.message}`);
+                    else logMsg(`Evento creado: ${event.title}`);
+                } else {
+                    logMsg(`Evento ${event.title} ya existe.`);
                 }
             }
 

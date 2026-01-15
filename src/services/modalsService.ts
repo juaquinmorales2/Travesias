@@ -7,6 +7,7 @@ export interface ModalData {
     registration_url: string;
     manual_url: string;
     active: boolean;
+    delay?: number; // seconds
 }
 
 export const modalsService = {

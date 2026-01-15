@@ -3,22 +3,26 @@ import { modalsService, ModalData } from "../../services/modalsService";
 
 const Modal = ({ onClose }: { onClose: () => void }) => {
   const [modalData, setModalData] = useState<ModalData | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const loadModal = async () => {
       const data = await modalsService.getActive();
       if (data && data.active) {
         setModalData(data);
+        // Apply delay
+        const delayMs = (data.delay || 0) * 1000;
+        setTimeout(() => {
+          setIsVisible(true);
+        }, delayMs);
       } else {
-        // If no active modal found or active is false, close it immediately
-        // (Though usually parent controls visibility, this is a safeguard if opened)
         onClose();
       }
     };
     loadModal();
   }, []);
 
-  if (!modalData) return null;
+  if (!modalData || !isVisible) return null;
 
   return (
     <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
