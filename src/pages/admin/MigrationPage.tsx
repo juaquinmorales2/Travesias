@@ -35,48 +35,251 @@ import img29 from '../../components/sections/sponsors/viva.png';
 import img30 from '../../components/sections/sponsors/werness.jpg';
 
 // Event Assets
-// Note: Adapting paths based on previous finds (src/components/public)
 import caboImg from '../../components/public/cabo.jpg';
 import sierraImg from '../../components/public/sierraminas.jpg';
 import puntaBallenaImg from '../../components/public/puntaballena.jpg';
-import ejemplo8Img from '../../components/sections/sponsors/clap.jpg'; // Using a placeholder if original not found perfectly matches
+import ejemplo8Img from '../../components/sections/sponsors/clap.jpg';
 import puntamaratonImg from '../../components/public/puntamaraton.jpg';
 
-// PDFs (Assuming they are in same folder or similar)
-// If I can't find them, I will skip upload or use placeholders
-// import interPdf from '../../components/public/inter.pdf';
+// PDFs
+import interPdf from '../../components/public/inter.pdf';
+import sierraPdf from '../../components/public/sierraminas.pdf';
+import puntaBallenaPdf from '../../components/public/puntaballena.pdf';
 
 const sponsorsData = [
     { name: 'Casa', src: img1, file: 'Casa.png' },
-    { name: 'Lavalleja', src: img2, file: 'Lavalleja.jpg' },
-    { name: 'Alfajores', src: img3, file: 'alfajores.jpg' },
-    { name: 'Asistencial', src: img4, file: 'asistencial.png' },
-    { name: 'Atlantico', src: img5, file: 'atlantico.jpg' },
-    { name: 'Casapueblo', src: img6, file: 'casapueblo.jpg' },
-    { name: 'Centenario', src: img7, file: 'centenario.png' },
-    { name: 'Clap', src: img8, file: 'clap.jpg' },
-    { name: 'Club', src: img9, file: 'club.png' },
-    { name: 'Confiteria', src: img10, file: 'confiteria.png' },
-    { name: 'Enjoy', src: img11, file: 'enjoy.png' },
-    { name: 'Ferreteria', src: img12, file: 'ferreteria.jpg' },
-    { name: 'Garmin', src: img13, file: 'garmin.jpg' },
-    { name: 'Intendencia', src: img14, file: 'intendencia.png' },
-    { name: 'Irisarri', src: img15, file: 'irisarri.jpg' },
-    { name: 'Jazz', src: img16, file: 'jazz.jpg' },
-    { name: 'Laguna', src: img17, file: 'laguna.png' },
-    { name: 'Lapataia', src: img18, file: 'lapataia.jpg' },
-    { name: 'Municipio', src: img19, file: 'municipio.jpg' },
-    { name: 'Museo', src: img20, file: 'museo.jpg' },
-    { name: 'Naval', src: img21, file: 'naval.jpg' },
-    { name: 'Nutri', src: img22, file: 'nutri.jpg' },
-    { name: 'Pbi', src: img23, file: 'pbi.png' },
-    { name: 'Rnx', src: img24, file: 'rnx.png' },
-    { name: 'Rocha', src: img25, file: 'rocha.jpg' },
-    { name: 'Talar', src: img26, file: 'talar.jpg' },
-    { name: 'Umami', src: img27, file: 'umami.png' },
-    { name: 'Vikinga', src: img28, file: 'vikinga.png' },
-    { name: 'Viva', src: img29, file: 'viva.png' },
-    { name: 'Werness', src: img30, file: 'werness.jpg' },
+    // ...
+    // (Skipping middle parts)
+    // ...
+    // 3. Migrate Events
+    logMsg('Migrando Eventos...');
+const eventsData = [
+    {
+        title: '2ª Edición Punta Maratón Internacional PDA 9 Playa Mansa',
+        date: '2026-01-17',
+        location: 'Punta del Este',
+        description: '2ª Edición Punta Maratón Internacional PDA 9 Playa Mansa - Una travesía internacional en las aguas de Punta del Este.',
+        distance: 'Varias distancias',
+        file_source: puntamaratonImg,
+        file_name: 'puntamaraton.jpg',
+        image_url: '',
+        registration_link: 'https://docs.google.com/forms/d/e/1FAIpQLSc8E_wQIR4XdHN1DjVCs1qrQibFEspj-OSlVicAoCjgDjW0fw/viewform',
+        manual_source: interPdf,
+        manual_name: 'inter.pdf',
+        manual_url: ''
+    },
+    {
+        title: 'Travesía Cabo Santa María',
+        date: '2026-02-15',
+        location: 'La Paloma',
+        description: 'Travesía Cabo Santa María - Una experiencia única nadando en las aguas de La Paloma.',
+        distance: 'Varias distancias',
+        file_source: caboImg,
+        file_name: 'cabo.jpg',
+        image_url: '',
+        registration_link: '',
+        manual_url: ''
+    },
+    {
+        title: '4ª Edición Travesía Internacional Sierra de Minas',
+        date: '2026-02-21',
+        location: 'Minas',
+        description: '4ª Edición Travesía Internacional Sierra de Minas - Evento internacional de natación en aguas abiertas.',
+        distance: 'Varias distancias',
+        file_source: sierraImg,
+        file_name: 'sierraminas.jpg',
+        image_url: '',
+        registration_link: 'https://forms.gle/FvQgnCnjQ6Shw6Nw7',
+        manual_source: sierraPdf,
+        manual_name: 'sierraminas.pdf',
+        manual_url: ''
+    },
+    {
+        title: '5ª Edición Punta Ballena Cup',
+        date: '2026-03-13',
+        location: 'Punta Ballena',
+        description: '5ª Edición Punta Ballena Cup - Copa de natación en aguas abiertas en Punta Ballena.',
+        distance: 'Varias distancias',
+        file_source: puntaBallenaImg,
+        file_name: 'puntaballena.jpg',
+        image_url: '',
+        registration_link: 'https://forms.gle/XD4ZtYBiZk8hfYMZ9',
+        manual_source: puntaBallenaPdf,
+        manual_name: 'puntaballena.pdf',
+        manual_url: ''
+    },
+    {
+        title: 'Gala de Premiación 2026',
+        date: '2026-04-03',
+        location: 'Punta del Este',
+        description: 'Gala de Premiación 2026 - Ceremonia de premiación para celebrar los logros de la temporada.',
+        distance: 'N/A',
+        file_source: ejemplo8Img,
+        file_name: 'gala.jpg',
+        image_url: '',
+        registration_link: '',
+        manual_url: ''
+    }
+];
+
+for (const event of eventsData) {
+    const { data: existingEvent } = await supabase
+        .from('events')
+        .select('id')
+        .eq('title', event.title)
+        .single();
+
+    if (!existingEvent) {
+        // Upload Image
+        if (event.file_source) {
+            try {
+                const response = await fetch(event.file_source);
+                const blob = await response.blob();
+                const file = new File([blob], event.file_name, { type: blob.type });
+                const fileName = `events/${event.file_name}`;
+
+                const { error: uploadError } = await supabase.storage
+                    .from('images')
+                    .upload(fileName, file, { upsert: true });
+
+                if (!uploadError) {
+                    const { data: { publicUrl } } = supabase.storage
+                        .from('images')
+                        .getPublicUrl(fileName);
+                    event.image_url = publicUrl;
+                }
+            } catch (e: any) {
+                logMsg(`Error subiendo imagen de evento ${event.title}: ${e.message}`);
+            }
+        }
+
+        // Upload Manual PDF
+        if ((event as any).manual_source) {
+            try {
+                const response = await fetch((event as any).manual_source);
+                const blob = await response.blob();
+                const file = new File([blob], (event as any).manual_name, { type: blob.type });
+                const fileName = `manuals/${(event as any).manual_name}`; // Using manuals/ subfolder
+
+                const { error: uploadError } = await supabase.storage
+                    .from('images') // Keeping same bucket 'images' as per instructions, but using folder
+                    .upload(fileName, file, { upsert: true });
+
+                if (!uploadError) {
+                    const { data: { publicUrl } } = supabase.storage
+                        .from('images')
+                        .getPublicUrl(fileName);
+                    event.manual_url = publicUrl;
+                }
+            } catch (e: any) {
+                logMsg(`Error subiendo PDF de evento ${event.title}: ${e.message}`);
+            }
+        }
+
+        // Remove internal fields
+        const { file_source, file_name, manual_source, manual_name, ...dbEvent } = event as any;
+
+        const { error: eventError } = await supabase
+            .from('events')
+            .insert([dbEvent]);
+
+        if (eventError) logMsg(`Error creando evento ${event.title}: ${eventError.message}`);
+        else logMsg(`Evento creado: ${event.title}`);
+    } else {
+        logMsg(`Evento ${event.title} ya existe.`);
+    }
+}
+
+// 4. Migrate Modal
+logMsg('Recuperando Modal Original...');
+const { data: existingModal } = await supabase
+    .from('modals')
+    .select('id')
+    .eq('title', 'Promo Inicio')
+    .maybeSingle();
+
+if (!existingModal) {
+    let modalImageUrl = '';
+    let modalManualUrl = '';
+
+    // Upload Modal Image
+    try {
+        const response = await fetch(puntamaratonImg);
+        const blob = await response.blob();
+        const file = new File([blob], 'puntamaraton.jpg', { type: blob.type });
+        const fileName = `modals/puntamaraton.jpg`;
+
+        const { error: uploadError } = await supabase.storage
+            .from('images')
+            .upload(fileName, file, { upsert: true });
+
+        if (!uploadError) {
+            const { data: { publicUrl } } = supabase.storage.from('images').getPublicUrl(fileName);
+            modalImageUrl = publicUrl;
+        }
+    } catch (e: any) { logMsg('Error subiendo imagen modal'); }
+
+    // Upload Modal Manual (inter.pdf)
+    try {
+        const response = await fetch(interPdf);
+        const blob = await response.blob();
+        const file = new File([blob], 'inter.pdf', { type: blob.type });
+        const fileName = `modals/inter.pdf`;
+
+        const { error: uploadError } = await supabase.storage
+            .from('images')
+            .upload(fileName, file, { upsert: true });
+
+        if (!uploadError) {
+            const { data: { publicUrl } } = supabase.storage.from('images').getPublicUrl(fileName);
+            modalManualUrl = publicUrl;
+        }
+    } catch (e: any) { logMsg('Error subiendo PDF modal'); }
+
+    const modalData = {
+        title: 'Promo Inicio',
+        image_url: modalImageUrl,
+        registration_url: 'https://docs.google.com/forms/d/e/1FAIpQLSc8E_wQIR4XdHN1DjVCs1qrQibFEspj-OSlVicAoCjgDjW0fw/viewform',
+        manual_url: modalManualUrl,
+        active: true,
+        delay: 5 // Default delay 5 seconds
+    };
+
+    const { error: modalError } = await supabase.from('modals').insert([modalData]);
+    if (modalError) logMsg(`Error creando modal: ${modalError.message}`);
+    else logMsg(`Modal original restaurado.`);
+} else {
+    logMsg('El modal ya existe.');
+}
+{ name: 'Lavalleja', src: img2, file: 'Lavalleja.jpg' },
+{ name: 'Alfajores', src: img3, file: 'alfajores.jpg' },
+{ name: 'Asistencial', src: img4, file: 'asistencial.png' },
+{ name: 'Atlantico', src: img5, file: 'atlantico.jpg' },
+{ name: 'Casapueblo', src: img6, file: 'casapueblo.jpg' },
+{ name: 'Centenario', src: img7, file: 'centenario.png' },
+{ name: 'Clap', src: img8, file: 'clap.jpg' },
+{ name: 'Club', src: img9, file: 'club.png' },
+{ name: 'Confiteria', src: img10, file: 'confiteria.png' },
+{ name: 'Enjoy', src: img11, file: 'enjoy.png' },
+{ name: 'Ferreteria', src: img12, file: 'ferreteria.jpg' },
+{ name: 'Garmin', src: img13, file: 'garmin.jpg' },
+{ name: 'Intendencia', src: img14, file: 'intendencia.png' },
+{ name: 'Irisarri', src: img15, file: 'irisarri.jpg' },
+{ name: 'Jazz', src: img16, file: 'jazz.jpg' },
+{ name: 'Laguna', src: img17, file: 'laguna.png' },
+{ name: 'Lapataia', src: img18, file: 'lapataia.jpg' },
+{ name: 'Municipio', src: img19, file: 'municipio.jpg' },
+{ name: 'Museo', src: img20, file: 'museo.jpg' },
+{ name: 'Naval', src: img21, file: 'naval.jpg' },
+{ name: 'Nutri', src: img22, file: 'nutri.jpg' },
+{ name: 'Pbi', src: img23, file: 'pbi.png' },
+{ name: 'Rnx', src: img24, file: 'rnx.png' },
+{ name: 'Rocha', src: img25, file: 'rocha.jpg' },
+{ name: 'Talar', src: img26, file: 'talar.jpg' },
+{ name: 'Umami', src: img27, file: 'umami.png' },
+{ name: 'Vikinga', src: img28, file: 'vikinga.png' },
+{ name: 'Viva', src: img29, file: 'viva.png' },
+{ name: 'Werness', src: img30, file: 'werness.jpg' },
 ];
 
 const MigrationPage = () => {
