@@ -86,7 +86,7 @@ export default function CalendarioEventos() {
               <div className="grid grid-cols-1 gap-6">
                 {events.map((ev, i) => (
                   <div key={ev.id} onClick={() => setSelectedEvent(ev)} className="relative rounded-2xl overflow-hidden border-4 border-teal-400 cursor-pointer hover:scale-[1.02] transition-transform opacity-0 translate-y-6 animate-[fadeInUp_0.7s_ease-out_forwards]" style={{ animationDelay: `${i * 0.2}s` }}>
-                    <img src={ev.img} alt={ev.title} className="w-full h-auto object-contain" />
+                    <img src={ev.imageUrl} alt={ev.title} className="w-full h-auto object-contain" />
                     <div className="absolute inset-0 bg-black/40 flex flex-col justify-between p-4">
                       <div className="flex justify-end">
                         <span className="bg-teal-400 text-black px-3 py-1 rounded text-sm font-bold">{ev.date.split(" ")[0]}</span>
