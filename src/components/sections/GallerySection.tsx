@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { eventsService } from "../../services/eventsService";
 import { Event } from "../../types/admin";
@@ -6,6 +6,17 @@ import { Event } from "../../types/admin";
 // --- Helpers ---
 const monthNamesES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
 function parseSpanishDate(str: string) {
+  // Try parsing as ISO date first (YYYY-MM-DD) which Supabase returns
+  const isoDate = new Date(str);
+  if (!isNaN(isoDate.getTime())) {
+    // Adjust for timezone if needed, but usually simple parsing works for display
+    // If the date string is YYYY-MM-DD, new Date() might interpret as UTC. 
+    // Let's ensure consistent local interpretation or use UTC components.
+    // For simplicity in this context:
+    return new Date(isoDate.getUTCFullYear(), isoDate.getUTCMonth(), isoDate.getUTCDate());
+  }
+
+  // Fallback to original Spanish format parsing
   const re = /^(\d{1,2})\s+de\s+([a-zA-ZñÑ]+)\s+(\d{4})$/i;
   const m = str.trim().toLowerCase().match(re);
   if (!m) return null;
@@ -33,7 +44,6 @@ interface MonthGroup {
 export default function CalendarioEventos() {
   const [months, setMonths] = useState<MonthGroup[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<EventWithDate | null>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     loadEvents();
@@ -41,7 +51,6 @@ export default function CalendarioEventos() {
 
   const loadEvents = async () => {
     try {
-      setLoading(true);
       const events = await eventsService.getAll();
 
       // Group events by month
