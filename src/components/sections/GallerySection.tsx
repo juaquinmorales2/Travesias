@@ -1,30 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { X } from "lucide-react";
-
-// Imágenes
-import ejemplo2 from "../public/cabo.jpg";
-import ejemplo3 from "../public/puntamaraton.jpg";
-import ejemplo6 from "../public/sierraminas.jpg";
-import ejemplo7 from "../public/puntaballena.jpg";
-import ejemplo8 from "./ejemplo8.jpg";
-
-// PDFs
-import PDA9PDF from "../public/inter.pdf";
-import MinasPDF from "../public/sierraminas.pdf";
-import BallenaPDF from "../public/puntaballena.pdf";
-
-// --- Datos de eventos ---
-const flyers = [
-  { id: 3, title: "2ª Edición Punta Maratón Internacional PDA 9 Playa Mansa", date: "17 de enero 2026", location: "Punta del Este", img: ejemplo3, inscripcion: "https://docs.google.com/forms/d/e/1FAIpQLSc8E_wQIR4XdHN1DjVCs1qrQibFEspj-OSlVicAoCjgDjW0fw/viewform", manual: PDA9PDF },
-  { id: 5, title: "Travesía Cabo Santa María", date: "15 de febrero 2026", location: "La Paloma", img: ejemplo2 },
-  { id: 6, title: "4ª Edición Travesía Internacional Sierra de Minas", date: "21 de febrero 2026", location: "Minas", img: ejemplo6, inscripcion: "https://forms.gle/FvQgnCnjQ6Shw6Nw7", manual: MinasPDF },
-  { id: 7, title: "5ª Edición Punta Ballena Cup", date: "13 de marzo 2026", location: "Punta Ballena", img: ejemplo7, inscripcion: "https://forms.gle/XD4ZtYBiZk8hfYMZ9", manual: BallenaPDF },
-  { id: 8, title: "Gala de Premiación 2026", date: "03 de abril 2026", location: "Punta del Este", img: ejemplo8 },
-];
+import { eventsService } from "../../services/eventsService";
+import { Event } from "../../types/admin";
 
 // --- Helpers ---
-const monthNamesES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
-function parseSpanishDate(str) {
+const monthNamesES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+function parseSpanishDate(str: string) {
   const re = /^(\d{1,2})\s+de\s+([a-zA-ZñÑ]+)\s+(\d{4})$/i;
   const m = str.trim().toLowerCase().match(re);
   if (!m) return null;
@@ -35,29 +16,58 @@ function parseSpanishDate(str) {
   if (month === -1) return null;
   return new Date(year, month, day);
 }
-function formatMonthYear(date) {
+function formatMonthYear(date: Date) {
   return `${monthNamesES[date.getMonth()].toUpperCase()} ${date.getFullYear()}`;
+}
+
+interface EventWithDate extends Event {
+  _dateObj: Date;
+}
+
+interface MonthGroup {
+  date: Date;
+  events: EventWithDate[];
 }
 
 // --- Componente principal ---
 export default function CalendarioEventos() {
-  const [months, setMonths] = useState([]);
-  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [months, setMonths] = useState<MonthGroup[]>([]);
+  const [selectedEvent, setSelectedEvent] = useState<EventWithDate | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const grouped = flyers.reduce((acc, f) => {
-      const d = parseSpanishDate(f.date);
-      if (!d) return acc;
-      const key = `${d.getFullYear()}-${d.getMonth()}`;
-      if (!acc[key]) acc[key] = [];
-      acc[key].push({ ...f, _dateObj: d });
-      return acc;
-    }, {});
-    const sortedMonths = Object.keys(grouped)
-      .map((k) => new Date(Number(k.split("-")[0]), Number(k.split("-")[1])))
-      .sort((a,b)=>a-b);
-    setMonths(sortedMonths.map(m=>({ date: m, events: grouped[`${m.getFullYear()}-${m.getMonth()}`] })));
+    loadEvents();
   }, []);
+
+  const loadEvents = async () => {
+    try {
+      setLoading(true);
+      const events = await eventsService.getAll();
+
+      // Group events by month
+      const grouped = events.reduce((acc: Record<string, EventWithDate[]>, event) => {
+        const d = parseSpanishDate(event.date);
+        if (!d) return acc;
+        const key = `${d.getFullYear()}-${d.getMonth()}`;
+        if (!acc[key]) acc[key] = [];
+        acc[key].push({ ...event, _dateObj: d });
+        return acc;
+      }, {});
+
+      const sortedMonths = Object.keys(grouped)
+        .map((k) => new Date(Number(k.split("-")[0]), Number(k.split("-")[1])))
+        .sort((a, b) => a.getTime() - b.getTime());
+
+      setMonths(sortedMonths.map(m => ({
+        date: m,
+        events: grouped[`${m.getFullYear()}-${m.getMonth()}`]
+      })));
+    } catch (error) {
+      console.error('Error loading events:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section className="py-12 bg-gradient-to-b from-black to-gray-900 text-white">
@@ -103,7 +113,7 @@ export default function CalendarioEventos() {
             </button>
 
             <div className="overflow-y-auto p-5 flex-1 flex flex-col gap-4">
-              <img src={selectedEvent.img} alt={selectedEvent.title} className="w-full h-auto max-h-64 object-contain mx-auto" />
+              {selectedEvent.imageUrl && <img src={selectedEvent.imageUrl} alt={selectedEvent.title} className="w-full h-auto max-h-64 object-contain mx-auto" />}
 
               <h3 className="text-2xl font-bold">{selectedEvent.title}</h3>
               <p className="text-sm text-gray-300">{selectedEvent.date}</p>
@@ -112,14 +122,14 @@ export default function CalendarioEventos() {
               {/* BOTONES */}
               <div className="flex flex-col items-center justify-center gap-4 mt-4">
                 <div className="flex gap-4 w-full">
-                  {selectedEvent.inscripcion && (
-                    <a href={selectedEvent.inscripcion} target="_blank" rel="noopener noreferrer" className="flex-1 bg-purple-600 hover:bg-purple-700 transition rounded-xl px-4 py-2 text-white font-semibold text-lg text-center shadow-lg flex items-center justify-center gap-2">
+                  {selectedEvent.registrationLink && (
+                    <a href={selectedEvent.registrationLink} target="_blank" rel="noopener noreferrer" className="flex-1 bg-purple-600 hover:bg-purple-700 transition rounded-xl px-4 py-2 text-white font-semibold text-lg text-center shadow-lg flex items-center justify-center gap-2">
                       <img src="https://images.emojiterra.com/google/android-11/1024px/1f4dd.png" className="w-6 h-6" alt="Google Forms" />
                       Inscribirme
                     </a>
                   )}
-                  {selectedEvent.manual && (
-                    <a href={selectedEvent.manual} download={`Manual-${selectedEvent.title}.pdf`} className="flex-1 bg-blue-600 hover:bg-blue-700 transition rounded-xl px-2 py-2 text-white font-semibold text-lg text-center shadow-lg flex items-center justify-center gap-2">
+                  {selectedEvent.manualUrl && (
+                    <a href={selectedEvent.manualUrl} download={`Manual-${selectedEvent.title}.pdf`} className="flex-1 bg-blue-600 hover:bg-blue-700 transition rounded-xl px-2 py-2 text-white font-semibold text-lg text-center shadow-lg flex items-center justify-center gap-2">
                       📘 Manual
                     </a>
                   )}

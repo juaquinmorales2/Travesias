@@ -9,6 +9,7 @@ export interface Event {
     distance: string;
     imageUrl?: string;
     registrationLink?: string;
+    manualUrl?: string;
     createdAt: string;
     updatedAt: string;
 }

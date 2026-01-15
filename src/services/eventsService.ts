@@ -21,6 +21,7 @@ export const eventsService = {
                 distance: event.distance,
                 imageUrl: event.image_url,
                 registrationLink: event.registration_link,
+                manualUrl: event.manual_url,
                 createdAt: event.created_at,
                 updatedAt: event.updated_at,
             }));
@@ -42,6 +43,7 @@ export const eventsService = {
                     distance: event.distance,
                     image_url: event.imageUrl,
                     registration_link: event.registrationLink,
+                    manual_url: event.manualUrl,
                 }])
                 .select()
                 .single();
@@ -57,6 +59,7 @@ export const eventsService = {
                 distance: data.distance,
                 imageUrl: data.image_url,
                 registrationLink: data.registration_link,
+                manualUrl: data.manual_url,
                 createdAt: data.created_at,
                 updatedAt: data.updated_at,
             };
@@ -76,6 +79,7 @@ export const eventsService = {
             if (event.distance !== undefined) updateData.distance = event.distance;
             if (event.imageUrl !== undefined) updateData.image_url = event.imageUrl;
             if (event.registrationLink !== undefined) updateData.registration_link = event.registrationLink;
+            if (event.manualUrl !== undefined) updateData.manual_url = event.manualUrl;
             updateData.updated_at = new Date().toISOString();
 
             const { data, error } = await supabase
@@ -96,6 +100,7 @@ export const eventsService = {
                 distance: data.distance,
                 imageUrl: data.image_url,
                 registrationLink: data.registration_link,
+                manualUrl: data.manual_url,
                 createdAt: data.created_at,
                 updatedAt: data.updated_at,
             };

@@ -16,6 +16,7 @@ const EventsPage = () => {
         distance: '',
         imageUrl: '',
         registrationLink: '',
+        manualUrl: '',
     });
 
     useEffect(() => {
@@ -62,6 +63,7 @@ const EventsPage = () => {
             distance: event.distance,
             imageUrl: event.imageUrl || '',
             registrationLink: event.registrationLink || '',
+            manualUrl: event.manualUrl || '',
         });
         setIsModalOpen(true);
     };
@@ -84,6 +86,7 @@ const EventsPage = () => {
             distance: '',
             imageUrl: '',
             registrationLink: '',
+            manualUrl: '',
         });
         setEditingEvent(null);
         setIsModalOpen(false);
@@ -289,6 +292,21 @@ const EventsPage = () => {
                                         className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-teal-400"
                                         placeholder="https://inscripciones.com"
                                     />
+                                </div>
+
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                                        URL del Manual (PDF)
+                                    </label>
+                                    <input
+                                        type="url"
+                                        name="manualUrl"
+                                        value={formData.manualUrl}
+                                        onChange={handleInputChange}
+                                        className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-teal-400"
+                                        placeholder="/manual.pdf o https://ejemplo.com/manual.pdf"
+                                    />
+                                    <p className="text-xs text-gray-500 mt-1">Ruta relativa o URL completa del PDF del manual del evento</p>
                                 </div>
 
                                 <div className="flex gap-4 pt-4">
