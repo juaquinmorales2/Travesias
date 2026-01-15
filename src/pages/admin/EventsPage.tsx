@@ -80,9 +80,13 @@ const EventsPage = () => {
 
         if (editingEvent) {
             // Update existing event
+            console.log('EventsPage: Updating event:', editingEvent.id, 'with data:', formData);
             const updated = await eventsService.update(editingEvent.id, formData);
             if (updated) {
+                console.log('EventsPage: Update successful, received:', updated);
                 setEvents(events.map(ev => ev.id === editingEvent.id ? updated : ev));
+            } else {
+                console.error('EventsPage: Update failed');
             }
         } else {
             // Create new event

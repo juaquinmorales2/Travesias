@@ -82,12 +82,17 @@ export const eventsService = {
             if (event.manualUrl !== undefined) updateData.manual_url = event.manualUrl;
             updateData.updated_at = new Date().toISOString();
 
+            console.log('eventsService: Sending update to Supabase:', { id, updateData });
+
             const { data, error } = await supabase
                 .from('events')
                 .update(updateData)
                 .eq('id', id)
                 .select()
                 .single();
+
+            if (data) console.log('eventsService: Supabase response data:', data);
+            if (error) console.error('eventsService: Supabase error:', error);
 
             if (error) throw error;
 

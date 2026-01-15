@@ -46,37 +46,54 @@ const getIconForUrl = (url: string) => {
     return Icons.default;
 };
 
+// Default hardcoded links (to ensure they are always visible even if DB is empty)
+const DEFAULT_LINKS = [
+    { id: 'def-insta', name: 'Instagram', url: 'https://www.instagram.com/travesiasuruguay/?__pwa=1' },
+    { id: 'def-yt', name: 'YouTube', url: 'https://www.youtube.com/@travesiasuruguay' },
+    { id: 'def-wa', name: 'WhatsApp', url: 'https://wa.me/59899930821' },
+    { id: 'def-fb', name: 'Facebook', url: 'https://www.facebook.com/travesiadelsauce' }
+];
+
 const SocialLinks = () => {
-    const [links, setLinks] = useState<SiteLinks[]>([]);
+    const [dbLinks, setDbLinks] = useState<SiteLinks[]>([]);
 
     useEffect(() => {
         const fetchLinks = async () => {
-            const allLinks = await linksService.getAll();
-            setLinks(allLinks.filter(l => l.type === 'social'));
+            // Only fetch, don't migrate logic here to avoid side effects
+            try {
+                const allLinks = await linksService.getAll();
+                setDbLinks(allLinks.filter(l => l.type === 'social'));
+            } catch (e) {
+                console.error("Error fetching social links", e);
+            }
         };
         fetchLinks();
     }, []);
 
-    // Also include hardcoded links if they are not in DB yet, 
-    // BUT user said "make it possible to add links", implying we should rely on DB primarily.
-    // However, to avoid breaking current layout if DB is empty, maybe I should migrate them?
-    // For now, I'll just render DB links. If DB is empty, nothing shows.
-    // Wait, that's risky. I should migrate the hardcoded links first or have default info.
-    // I already provided a migration tool. User should use that. 
-    // Actually, migration tool didn't migrate links. 
-    // I will add a fallback in case no links are found? No, user wants to manage them. 
-    // I'll assume user will add them or I can add them to migration later.
-    // BETTER: I will add the defaults if the list is empty, OR just instructions.
+    // Merge default links with DB links (avoiding duplicates if URL matches)
+    // If a DB link has the same URL as a default link, we favour the DB link (allows editing name/desc)
+    // AND we also include any NEW DB links.
 
-    // To be safe and helpful, I'll migrate the current hardcoded links if the table is empty!
-    // I can do that in a useEffect with a check, but that's "unexpected side effect".
-    // I'll stick to just rendering. If user sees no links, they will add them (that's what they asked for).
+    // Normalize URL for comparison
+    const normalize = (u: string) => u.toLowerCase().trim();
 
-    if (links.length === 0) return null;
+    const mergedLinks = [...DEFAULT_LINKS];
+
+    // Add DB links if they are not already in defaults
+    dbLinks.forEach(dbLink => {
+        const isDuplicate = mergedLinks.some(def => normalize(def.url) === normalize(dbLink.url));
+        if (!isDuplicate) {
+            // Add as new entry
+            mergedLinks.push(dbLink);
+        } else {
+            // Optional: Upgrade default to DB version (if we wanted to support editing defaults)
+            // But visually they are just icons, so it doesn't matter much.
+        }
+    });
 
     return (
         <div className="flex space-x-6 mb-6 text-center items-center justify-center">
-            {links.map(link => {
+            {mergedLinks.map(link => {
                 const Icon = getIconForUrl(link.url);
                 return (
                     <a
