@@ -9,6 +9,9 @@ import DashboardPage from './pages/admin/DashboardPage';
 import EventsPage from './pages/admin/EventsPage';
 import AnnouncementsPage from './pages/admin/AnnouncementsPage';
 import LinksPage from './pages/admin/LinksPage';
+import SponsorsPage from './pages/admin/SponsorsPage';
+import ModalsPage from './pages/admin/ModalsPage';
+import MigrationPage from './pages/admin/MigrationPage';
 import ProtectedRoute from './components/admin/ProtectedRoute';
 
 function App() {
@@ -61,6 +64,30 @@ function App() {
             element={
               <ProtectedRoute>
                 <LinksPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/sponsors"
+            element={
+              <ProtectedRoute>
+                <SponsorsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/modals"
+            element={
+              <ProtectedRoute>
+                <ModalsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/migrate"
+            element={
+              <ProtectedRoute>
+                <MigrationPage />
               </ProtectedRoute>
             }
           />

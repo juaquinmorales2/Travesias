@@ -1,8 +1,25 @@
-import React from "react";
-import fondo from "../public/puntamaraton.jpg";
-import Laguna from "../public/inter.pdf";
+import React, { useEffect, useState } from "react";
+import { modalsService, ModalData } from "../../services/modalsService";
 
 const Modal = ({ onClose }: { onClose: () => void }) => {
+  const [modalData, setModalData] = useState<ModalData | null>(null);
+
+  useEffect(() => {
+    const loadModal = async () => {
+      const data = await modalsService.getActive();
+      if (data && data.active) {
+        setModalData(data);
+      } else {
+        // If no active modal found or active is false, close it immediately
+        // (Though usually parent controls visibility, this is a safeguard if opened)
+        onClose();
+      }
+    };
+    loadModal();
+  }, []);
+
+  if (!modalData) return null;
+
   return (
     <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
       <div className="relative w-auto h-[90vh] max-w-[450px] rounded-2xl overflow-hidden shadow-2xl bg-black/70 text-white flex flex-col">
@@ -16,35 +33,48 @@ const Modal = ({ onClose }: { onClose: () => void }) => {
         </button>
         {/* Imagen */}
         <div className="w-full h-[90%] overflow-hidden flex justify-center">
-          <img
-            src={fondo}
-            className="h-full w-auto object-cover"
-          />
+          {modalData.image_url ? (
+            <img
+              src={modalData.image_url}
+              className="h-full w-auto object-cover"
+              alt={modalData.title}
+            />
+          ) : (
+            <div className="flex items-center justify-center h-full w-full bg-gray-800 text-gray-400">
+              Sin imagen
+            </div>
+          )}
         </div>
         {/* Contenido y botones */}
         <div className="flex flex-col items-center justify-center gap-5 p-6 h-[40%]">
           {/* Botones uno al lado del otro */}
           <div className="flex gap-4 w-full">
-            <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSc8E_wQIR4XdHN1DjVCs1qrQibFEspj-OSlVicAoCjgDjW0fw/viewform"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 bg-purple-600 hover:bg-purple-700 transition rounded-xl px-4 py-2 text-white font-semibold text-lg text-center shadow-lg flex items-center justify-center gap-2"
-            >
-              <img
-                src="https://images.emojiterra.com/google/android-11/1024px/1f4dd.png"
-                className="w-6 h-6"
-                alt="Google Forms"
-              />
-              Inscribirme
-            </a>
-            <a
-              href={Laguna}
-              download="Manual-Tecnico.pdf"
-              className="flex-1 bg-blue-600 hover:bg-blue-700 transition rounded-xl px-2 py-2 text-white font-semibold text-lg text-center shadow-lg flex items-center justify-center gap-2"
-            >
-              📘 Manual
-            </a>
+            {modalData.registration_url && (
+              <a
+                href={modalData.registration_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 bg-purple-600 hover:bg-purple-700 transition rounded-xl px-4 py-2 text-white font-semibold text-lg text-center shadow-lg flex items-center justify-center gap-2"
+              >
+                <img
+                  src="https://images.emojiterra.com/google/android-11/1024px/1f4dd.png"
+                  className="w-6 h-6"
+                  alt="Register"
+                />
+                Inscribirme
+              </a>
+            )}
+
+            {modalData.manual_url && (
+              <a
+                href={modalData.manual_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 bg-blue-600 hover:bg-blue-700 transition rounded-xl px-2 py-2 text-white font-semibold text-lg text-center shadow-lg flex items-center justify-center gap-2"
+              >
+                📘 Manual
+              </a>
+            )}
           </div>
           {/* Botón Más Información (WhatsApp) */}
           <a

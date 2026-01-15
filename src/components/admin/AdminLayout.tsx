@@ -7,7 +7,9 @@ import {
     Megaphone,
     Link as LinkIcon,
     LogOut,
-    Home
+    Home,
+    Image,
+    Upload
 } from 'lucide-react';
 
 interface AdminLayoutProps {
@@ -29,6 +31,9 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
         { path: '/admin/events', label: 'Eventos', icon: Calendar },
         { path: '/admin/announcements', label: 'Anuncios', icon: Megaphone },
         { path: '/admin/links', label: 'Enlaces y PDFs', icon: LinkIcon },
+        { path: '/admin/sponsors', label: 'Sponsors', icon: Image },
+        { path: '/admin/modals', label: 'Pop-up Inicio', icon: Megaphone },
+        { path: '/admin/migrate', label: 'Migración', icon: Upload },
     ];
 
     return (
@@ -76,8 +81,8 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
                                     key={item.path}
                                     to={item.path}
                                     className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${isActive
-                                            ? 'bg-teal-400/20 text-teal-300 border border-teal-400/30'
-                                            : 'text-gray-400 hover:bg-gray-800/50 hover:text-white'
+                                        ? 'bg-teal-400/20 text-teal-300 border border-teal-400/30'
+                                        : 'text-gray-400 hover:bg-gray-800/50 hover:text-white'
                                         }`}
                                 >
                                     <Icon size={20} />

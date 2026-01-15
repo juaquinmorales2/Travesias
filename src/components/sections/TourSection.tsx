@@ -1,18 +1,21 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useInView } from '../../hooks/useInView';
-
-const tweets = [
-  {
-    id: 1,
-    content: "Link de fotos próximamente aqui...",
-    date: "2025-12-08",
-  },
-];
+import { announcementsService } from '../../services/announcementsService';
+import { Announcement } from '../../types/admin';
 
 const TwitterSection = () => {
   const sectionRef = useRef(null);
   const tweetsRef = useRef(null);
   const { inView } = useInView(sectionRef, { threshold: 0.1 });
+  const [announcements, setAnnouncements] = useState<Announcement[]>([]);
+
+  useEffect(() => {
+    const loadAnnouncements = async () => {
+      const data = await announcementsService.getAll();
+      setAnnouncements(data);
+    };
+    loadAnnouncements();
+  }, []);
 
   return (
     <section
@@ -24,16 +27,14 @@ const TwitterSection = () => {
         {/* Título */}
         <div className="text-center mb-16">
           <h2
-            className={`text-3xl md:text-4xl font-bold mb-4 transition-all duration-700 ${
-              inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
+            className={`text-3xl md:text-4xl font-bold mb-4 transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
           >
             NOVEDADES
           </h2>
           <p
-            className={`text-gray-400 max-w-2xl mx-auto transition-all duration-700 delay-200 ${
-              inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
+            className={`text-gray-400 max-w-2xl mx-auto transition-all duration-700 delay-200 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
           >
             Mira aquí anuncios de nuestras próximas novedades y eventos.
           </p>
@@ -41,37 +42,39 @@ const TwitterSection = () => {
 
         {/* Contenido principal */}
         <div className="flex flex-col md:flex-row gap-12 items-stretch justify-center">
-          {/* Tweets */}
+          {/* Tweets / Anuncios */}
           <div
             ref={tweetsRef}
-            className={`relative max-w-lg w-full bg-gray-900/60 backdrop-blur-sm rounded-lg p-6 shadow-xl transition-all duration-700 ${
-              inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
+            className={`relative max-w-lg w-full bg-gray-900/60 backdrop-blur-sm rounded-lg p-6 shadow-xl transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
           >
             <HeartsAnimation containerRef={tweetsRef} />
             <h3 className="text-2xl font-semibold mb-6 text-white text-center md:text-left">
               Últimos Anuncios
             </h3>
-            <ul className="space-y-5">
-              {tweets.map((tweet) => (
-                <li
-                  key={tweet.id}
-                  className="bg-gray-800 p-4 rounded-lg border border-gray-700"
-                >
-                  <p className="text-gray-300">{tweet.content}</p>
-                  <span className="text-sm text-gray-500 block mt-2">
-                    {tweet.date}
-                  </span>
-                </li>
-              ))}
+            <ul className="space-y-5 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+              {announcements.length === 0 ? (
+                <li className="text-gray-400 italic">No hay anuncios por el momento.</li>
+              ) : (
+                announcements.map((announcement) => (
+                  <li
+                    key={announcement.id}
+                    className="bg-gray-800 p-4 rounded-lg border border-gray-700"
+                  >
+                    <p className="text-gray-300">{announcement.content}</p>
+                    <span className="text-sm text-gray-500 block mt-2">
+                      {new Date(announcement.date).toLocaleDateString('es-UY', { year: 'numeric', month: 'long', day: 'numeric' })}
+                    </span>
+                  </li>
+                ))
+              )}
             </ul>
           </div>
 
           {/* Videos */}
           <div
-            className={`flex flex-col gap-6 flex-grow max-w-md rounded-lg overflow-hidden shadow-xl transition-all duration-700 ${
-              inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
+            className={`flex flex-col gap-6 flex-grow max-w-md rounded-lg overflow-hidden shadow-xl transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
             style={{ minHeight: '400px' }}
           >
             <iframe

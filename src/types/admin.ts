@@ -39,3 +39,13 @@ export interface VideoLink {
     order: number;
     createdAt: string;
 }
+
+export interface Sponsor {
+    id: string;
+    name: string;
+    imageUrl: string;
+    active: boolean;
+    orderIndex: number;
+    createdAt: string;
+    updatedAt: string;
+}
