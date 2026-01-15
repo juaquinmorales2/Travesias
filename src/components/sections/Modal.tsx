@@ -26,7 +26,7 @@ const Modal = ({ onClose }: { onClose: () => void }) => {
           {/* Botones uno al lado del otro */}
           <div className="flex gap-4 w-full">
             <a
-              href="https://forms.gle/ih7nsjkL13HoXAZm8"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSc8E_wQIR4XdHN1DjVCs1qrQibFEspj-OSlVicAoCjgDjW0fw/viewform"
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 bg-purple-600 hover:bg-purple-700 transition rounded-xl px-4 py-2 text-white font-semibold text-lg text-center shadow-lg flex items-center justify-center gap-2"
