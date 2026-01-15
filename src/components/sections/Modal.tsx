@@ -1,12 +1,11 @@
 import React from "react";
-import fondo from "../public/laguna.png";
-import Laguna from "../public/laguna.pdf";
+import fondo from "../public/puntamaraton.jpg";
+import Laguna from "../public/inter.pdf";
 
 const Modal = ({ onClose }: { onClose: () => void }) => {
   return (
     <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
       <div className="relative w-auto h-[90vh] max-w-[450px] rounded-2xl overflow-hidden shadow-2xl bg-black/70 text-white flex flex-col">
-
         {/* Botón cerrar */}
         <button
           onClick={onClose}
@@ -15,7 +14,6 @@ const Modal = ({ onClose }: { onClose: () => void }) => {
         >
           ×
         </button>
-
         {/* Imagen */}
         <div className="w-full h-[90%] overflow-hidden flex justify-center">
           <img
@@ -23,13 +21,10 @@ const Modal = ({ onClose }: { onClose: () => void }) => {
             className="h-full w-auto object-cover"
           />
         </div>
-
         {/* Contenido y botones */}
         <div className="flex flex-col items-center justify-center gap-5 p-6 h-[40%]">
-
           {/* Botones uno al lado del otro */}
           <div className="flex gap-4 w-full">
-
             <a
               href="https://forms.gle/ih7nsjkL13HoXAZm8"
               target="_blank"
@@ -43,7 +38,6 @@ const Modal = ({ onClose }: { onClose: () => void }) => {
               />
               Inscribirme
             </a>
-
             <a
               href={Laguna}
               download="Manual-Tecnico.pdf"
@@ -51,9 +45,7 @@ const Modal = ({ onClose }: { onClose: () => void }) => {
             >
               📘 Manual
             </a>
-
           </div>
-
           {/* Botón Más Información (WhatsApp) */}
           <a
             href="https://wa.me/59899930821"
